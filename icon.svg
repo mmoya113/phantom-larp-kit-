@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6bd2a6"/><stop offset=".52" stop-color="#6bd2a6"/><stop offset=".52" stop-color="#fff0ad"/><stop offset="1" stop-color="#fff0ad"/></linearGradient></defs><rect width="512" height="512" rx="120" fill="#000"/><circle cx="256" cy="256" r="170" fill="url(#g)"/><rect x="155" y="170" width="205" height="62" rx="31" fill="#1a1a1d" transform="rotate(-12 257.5 201)"/><path d="M190 316l30-22 28 25m74-25l-30 22-28-25" fill="none" stroke="#17171a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/><text x="256" y="430" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="700" fill="#d4cdfd">SIM</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="72" y1="52" x2="438" y2="460" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7BE0B7"/>
+      <stop offset=".52" stop-color="#B5A7FF"/>
+      <stop offset="1" stop-color="#FFF0A9"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="174" y1="160" x2="347" y2="346" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#222229"/>
+      <stop offset="1" stop-color="#111116"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="#050506"/>
+  <circle cx="256" cy="246" r="174" fill="url(#bg)"/>
+  <path d="M166 205c33-35 67-51 103-52 37-1 71 13 103 43-15 18-32 32-51 43-21-15-42-22-65-21-23 0-46 8-68 24-9-10-16-22-22-37Z" fill="url(#mark)"/>
+  <circle cx="214" cy="247" r="11" fill="#B8AAFF"/>
+  <circle cx="302" cy="247" r="11" fill="#B8AAFF"/>
+  <path d="M207 309c18 18 35 26 51 26 17 0 34-8 52-26" fill="none" stroke="#17171C" stroke-width="19" stroke-linecap="round"/>
+  <rect x="177" y="381" width="158" height="44" rx="22" fill="#0D0D10" fill-opacity=".88"/>
+  <text x="256" y="411" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="3" fill="#E2DCFF">SIM</text>
+</svg>
