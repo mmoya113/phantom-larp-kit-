@@ -31,7 +31,10 @@ button,input{font:inherit}
 .account{padding:23px 0 14px}
 .account-name{color:#a5a5aa;font-size:16px;font-weight:500;line-height:1;margin-bottom:17px;letter-spacing:-.1px}.account-name .chev{display:inline-block;font-size:20px;font-weight:300;vertical-align:-1px;margin-left:2px;transform:translateY(-1px)}
 .balance{display:inline-block;font-size:49px;line-height:.94;font-weight:600;letter-spacing:-3.35px;cursor:pointer;user-select:none}.balance:active{opacity:.7}
-.dayline{display:flex;align-items:center;gap:7px;margin-top:12px;color:var(--red);font-size:16px;font-weight:550;line-height:1}.daypct{background:var(--red);color:#111113;border-radius:7px;padding:4px 7px 4px;font-weight:560}
+.dayline{display:flex;align-items:center;gap:7px;margin-top:12px;font-size:16px;font-weight:550;line-height:1}
+.daypct{color:#111113;border-radius:7px;padding:4px 7px;font-weight:560}
+.pos{color:var(--green)!important}.neg{color:var(--red)!important}
+.daypct.pos{background:var(--green);color:#111113!important}.daypct.neg{background:var(--red);color:#111113!important}
 .section{margin-top:15px}
 .cash{height:68px;border:1px solid var(--stroke);background:linear-gradient(#1d1d1f,#19191b);border-radius:22px;display:flex;align-items:center;padding:0 18px}
 .cash-icon{width:34px;height:25px;position:relative;flex:0 0 34px}.cash-icon:before{content:"";position:absolute;inset:1px 0;border-radius:5px;background:#9b9ca2}.cash-icon:after{content:"";position:absolute;left:12px;top:7px;width:10px;height:10px;border-radius:50%;background:#4e4f53;box-shadow:-10px 0 0 -3px #4e4f53,10px 0 0 -3px #4e4f53}
@@ -42,7 +45,6 @@ button,input{font:inherit}
 .coin-img,.coin-fallback{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#29292c}.coin-fallback{display:grid;place-items:center;font-size:13px;font-weight:650}
 .token-main{min-width:0}.token-main strong{display:block;font-size:17px;font-weight:560;line-height:1.05;letter-spacing:-.15px}.token-main span{display:block;color:#9b9ba0;font-size:13px;font-weight:400;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
 .token-side{text-align:right}.token-side strong{display:block;font-size:16px;font-weight:400;letter-spacing:-.1px}.token-side span{display:block;margin-top:4px;font-size:12px;font-weight:430}
-.pos{color:var(--green)!important}.neg{color:var(--red)!important}
 .empty{color:#777;padding:18px 8px;text-align:center;border:1px dashed #252528;border-radius:19px;font-size:12px}
 .perps{display:grid;grid-auto-flow:column;grid-auto-columns:145px;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.perps::-webkit-scrollbar{display:none}
 .perp{height:132px;border:1px solid var(--stroke);background:linear-gradient(#1d1d1f,#19191b);border-radius:22px;padding:14px}
@@ -61,7 +63,7 @@ button,input{font:inherit}
 <div class="app">
 <header class="header"><nav class="nav" aria-label="Navegación"><div class="avatar" aria-hidden="true"></div><button class="pill active">Inicio</button><button class="pill">Operar</button><button class="pill">Predecir</button><button class="pill">Explorar</button></nav></header>
 <main class="main">
-<section class="account"><div class="account-name">Cuenta 1 <span class="chev">⌄</span></div><div class="balance" id="portfolio" role="button" tabindex="0" aria-label="Editar saldos">$8.26</div><div class="dayline"><span id="deltaUsd">-$0.00032</span><span class="daypct" id="deltaPct">-0.00%</span></div></section>
+<section class="account"><div class="account-name">Cuenta 1 <span class="chev">⌄</span></div><div class="balance" id="portfolio" role="button" tabindex="0" aria-label="Editar saldos">$8.26</div><div class="dayline"><span id="deltaUsd">-$0.00032</span><span class="daypct neg" id="deltaPct">-0.00%</span></div></section>
 <section class="section"><div class="cash"><div class="cash-icon"></div><div class="cash-label">Cash</div><div class="cash-value">$0.00</div></div></section>
 <section class="section"><div class="section-head"><div class="section-title">Tokens</div><div class="section-arrow">›</div></div><div class="tokens" id="tokens"></div></section>
 <section class="section"><div class="section-head"><div class="section-title">Perps</div><div class="section-arrow">›</div></div><div class="perps" id="perps"></div></section>
@@ -102,7 +104,9 @@ function render(){
  const ch=weight?weighted/weight:0;const delta=total*(ch/100);
  $('#deltaUsd').textContent=`${delta>=0?'+':'-'}${money(Math.abs(delta))}`;
  $('#deltaPct').textContent=pct(ch);
- const cls=ch>=0?'pos':'neg';$('#deltaUsd').className=cls;$('#deltaPct').className=`daypct ${cls}`;
+ const cls=ch>=0?'pos':'neg';
+ $('#deltaUsd').className=cls;
+ $('#deltaPct').className=`daypct ${cls}`;
  renderPerps();renderPreds();renderFieldsIfOpen();
 }
 function renderPerps(){
