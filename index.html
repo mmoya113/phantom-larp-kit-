@@ -2,38 +2,161 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#000000">
-<title>Phantom LARP Kit — Simulación</title>
+<title>Wallet Simulator</title>
 <style>
-:root{--bg:#000;--card:#1b1b1d;--card2:#222225;--text:#f7f7f8;--muted:#9b9ba1;--purple:#ab9dfd;--green:#55d984;--red:#ff4d57;--line:#29292d}*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}body{min-height:100vh}.app{width:min(100%,900px);margin:auto;padding:calc(8px + env(safe-area-inset-top)) 18px calc(120px + env(safe-area-inset-bottom));min-height:100vh}.top{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.9);backdrop-filter:blur(18px);padding:8px 0 16px}.nav{display:flex;gap:10px;align-items:center;overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.logo{flex:0 0 50px;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#6fd0aa,#fff0a3)}.ghost{width:33px;height:33px;border-radius:16px 16px 12px 12px;background:#17171a;position:relative;transform:rotate(-10deg)}.ghost:before,.ghost:after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;background:var(--purple);top:10px}.ghost:before{left:9px}.ghost:after{right:9px}.ghost i{position:absolute;width:15px;height:4px;border-radius:4px;background:#f5e89e;bottom:7px;left:9px;transform:rotate(12deg)}.pill{border:0;background:#202022;color:#aaa;border-radius:23px;padding:13px 21px;font-weight:700;font-size:17px;white-space:nowrap}.pill.active{background:var(--purple);color:#111}.sim{margin-left:auto;border:1px solid #5d52a2;background:#161320;color:#d9d2ff;border-radius:999px;padding:8px 10px;font-size:10px;font-weight:900;letter-spacing:.08em}.account{padding:34px 2px 18px}.account-row{display:flex;justify-content:space-between;align-items:center}.account-name{color:#aaa;font-weight:700;font-size:18px}.edit{border:0;background:#1d1d20;color:#ddd;border-radius:13px;padding:9px 12px;font-weight:800}.balance{font-size:clamp(50px,13vw,78px);font-weight:850;letter-spacing:-4px;line-height:1;margin:17px 0 12px}.sub{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.change{font-weight:800;font-size:18px}.pos{color:var(--green)}.neg{color:var(--red)}.solEq{color:#aaa;background:#141416;border:1px solid #222;border-radius:10px;padding:6px 9px;font-size:13px}.section{margin-top:24px}.section-title{font-size:28px;font-weight:850;letter-spacing:-.8px;margin-bottom:12px}.section-head{display:flex;align-items:center;justify-content:space-between}.cash,.token,.perp,.pred{border:1px solid var(--line);background:linear-gradient(180deg,#1f1f21,#19191b);border-radius:26px}.cash{height:86px;display:flex;align-items:center;padding:0 22px}.cashIcon{width:44px;height:44px;border-radius:14px;background:#aaa;color:#242428;display:grid;place-items:center;font-size:24px;font-weight:900}.cash label{font-size:20px;font-weight:800;margin-left:18px}.cash b{margin-left:auto;font-size:20px;font-weight:500}.tokens{display:flex;flex-direction:column;gap:10px}.token{display:grid;grid-template-columns:52px 1fr auto;gap:13px;align-items:center;padding:14px 16px;min-height:94px}.coin{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-weight:900}.sol{background:linear-gradient(145deg,#9e68ff,#32dfc3);color:#101012}.usdc{background:#3975e7}.bonk{background:#f3a13f;color:#5c2b00}.wif{background:#d9c9b8;color:#2b211b}.token strong{display:block;font-size:20px}.token .meta{display:block;color:#9a9aa0;font-size:15px;margin-top:5px}.side{text-align:right}.side strong{font-size:18px;font-weight:600}.side span{display:block;margin-top:5px;font-size:14px}.perps{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:10px;overflow-x:auto;scrollbar-width:none}.perp{padding:18px 16px;min-height:150px}.perpIcon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:24px;font-weight:900;margin-bottom:18px}.btc{background:#f29d38}.eth{background:#e7e7e9;color:#25252a}.solp{background:linear-gradient(145deg,#956aff,#2cdac0);color:#111}.lev{background:#2a2a2d;border-radius:7px;padding:4px 7px;font-size:13px;margin-left:5px}.move{margin-top:12px;font-weight:800}.preds{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pred{padding:16px;min-height:120px}.pred small{color:#8e8e93;font-weight:800}.pred strong{display:block;font-size:22px;margin-top:13px}.pred p{color:#aaa;font-size:13px;margin:8px 0 0}.footnote{text-align:center;color:#8e8e94;font-size:12px;margin:24px 0}.bottom{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:0;width:min(900px,100%);padding:10px 18px calc(13px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,rgba(0,0,0,.9) 25%,#000 48%)}.warning{text-align:center;font-size:11px;font-weight:900;color:#cbc5f1;margin-bottom:8px}.bottomrow{display:flex;gap:11px}.search{height:58px;flex:1;border:1px solid #303034;border-radius:29px;background:rgba(35,35,38,.95);display:flex;align-items:center;color:#8d8d92;padding:0 18px;font-size:18px}.plus{width:58px;height:58px;border-radius:50%;border:0;background:var(--purple);font-size:39px}.sheet{display:none;position:fixed;z-index:100;inset:0;background:rgba(0,0,0,.66);align-items:flex-end;justify-content:center}.sheet.open{display:flex}.panel{width:min(900px,100%);background:#151517;border:1px solid #303034;border-radius:28px 28px 0 0;padding:14px 18px calc(24px + env(safe-area-inset-bottom))}.handle{width:42px;height:5px;background:#4b4b50;border-radius:5px;margin:0 auto 15px}.field{display:grid;grid-template-columns:1fr 135px;gap:12px;align-items:center;background:#202023;border:1px solid #2d2d31;border-radius:17px;padding:12px 14px;margin:9px 0}.field input{width:100%;border:0;outline:0;background:#101012;color:#fff;border-radius:11px;padding:10px;text-align:right;font-size:16px}.actions{display:flex;gap:10px;margin-top:14px}.actions button{flex:1;border:0;border-radius:16px;padding:14px;font-weight:850;font-size:15px}.cancel{background:#29292d;color:#eee}.save{background:var(--purple);color:#111}.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(15px);bottom:120px;background:#242427;border:1px solid #3b3b40;border-radius:14px;padding:11px 15px;font-weight:800;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}@media(min-width:700px){.preds{grid-template-columns:repeat(4,1fr)}.perps{grid-auto-columns:220px}}@media(max-width:390px){.sim{display:none}.pill{padding:11px 17px;font-size:16px}.token{grid-template-columns:46px 1fr auto;padding:12px}.coin{width:46px;height:46px}.balance{font-size:54px}}
+:root{--bg:#000;--card:#1c1c1e;--card2:#202022;--text:#f5f5f7;--muted:#9b9b9f;--purple:#aaa0ff;--green:#5dde79;--red:#ff454f;--line:#29292c}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#000;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;overflow-x:hidden}
+button,input{font:inherit}
+.app{width:min(100%,900px);margin:0 auto;min-height:100vh;padding:calc(env(safe-area-inset-top) + 8px) 0 calc(118px + env(safe-area-inset-bottom))}
+.header{position:sticky;top:0;z-index:30;background:rgba(0,0,0,.93);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid #111}
+.nav{height:94px;display:flex;align-items:center;gap:14px;padding:12px 18px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.avatar{width:54px;height:54px;border-radius:50%;flex:0 0 54px;background:linear-gradient(145deg,#67cca2 0 52%,#fff0ae 52%);position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.avatar:before{content:"";position:absolute;width:31px;height:11px;border-radius:12px;background:#1c1c20;left:10px;top:14px;transform:rotate(-13deg)}
+.avatar:after{content:"≻≺";position:absolute;left:11px;bottom:5px;color:#19191c;font-weight:900;font-size:13px;letter-spacing:-3px}
+.pill{border:0;background:#202020;color:#aaa;border-radius:28px;padding:15px 22px;font-weight:680;font-size:18px;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)}
+.pill.active{background:var(--purple);color:#141416}
+.sim-badge{position:fixed;right:10px;top:calc(env(safe-area-inset-top) + 4px);z-index:100;border:1px solid rgba(171,160,255,.55);background:rgba(20,18,31,.88);backdrop-filter:blur(10px);color:#d8d2ff;border-radius:999px;padding:4px 8px;font-size:9px;font-weight:900;letter-spacing:.1em;pointer-events:none}
+.main{padding:0 18px}
+.account{padding:36px 0 28px}
+.account-name{color:#aaa;font-size:18px;font-weight:700;margin-bottom:18px}
+.account-name .chev{font-size:26px;font-weight:300;vertical-align:-2px;margin-left:2px}
+.balance{display:inline-block;font-size:clamp(58px,13.8vw,82px);font-weight:780;letter-spacing:-4.7px;line-height:.95;cursor:pointer;user-select:none}
+.balance:active{opacity:.72}
+.dayline{margin-top:18px;display:flex;align-items:center;gap:9px;color:var(--red);font-size:19px;font-weight:760}
+.daypct{background:var(--red);color:#151517;border-radius:7px;padding:4px 8px;line-height:1}
+.section{margin-top:18px}
+.cash{height:88px;border-radius:27px;background:linear-gradient(180deg,#1f1f20,#1a1a1c);border:1px solid #242426;display:flex;align-items:center;padding:0 22px}
+.cash-icon{width:42px;height:34px;position:relative;margin-left:2px}
+.cash-icon:before,.cash-icon:after{content:"";position:absolute;inset:3px 0;border-radius:6px;background:#9fa0a7}
+.cash-icon:after{inset:9px 6px;background:#1c1c1e;border-radius:50%}
+.cash-icon i,.cash-icon b{position:absolute;width:6px;height:6px;border-radius:50%;background:#55565b;z-index:2;top:14px}
+.cash-icon i{left:5px}.cash-icon b{right:5px}
+.cash-label{font-size:21px;font-weight:760;margin-left:22px}.cash-value{margin-left:auto;font-size:21px;font-weight:430}
+.section-head{display:flex;align-items:center;margin:33px 0 14px}
+.section-title{font-size:29px;font-weight:810;letter-spacing:-.8px}.section-arrow{font-size:38px;color:#aaa;font-weight:300;margin-left:7px;line-height:.7}
+.tokens{display:flex;flex-direction:column;gap:10px}
+.token{min-height:94px;border-radius:26px;background:linear-gradient(180deg,#1f1f20,#1a1a1c);border:1px solid #242426;display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:13px;padding:14px 17px}
+.coin-img{width:50px;height:50px;border-radius:50%;object-fit:cover;background:#2b2b2e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.coin-fallback{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#3974d7;font-weight:900;font-size:19px}
+.token-main strong{display:block;font-size:20px;letter-spacing:-.15px}.token-main span{display:block;color:#9c9ca0;font-size:16px;margin-top:5px}
+.token-side{text-align:right}.token-side strong{display:block;font-size:19px;font-weight:450}.token-side span{display:block;margin-top:5px;font-size:15px;color:var(--muted)}
+.pos{color:var(--green)!important}.neg{color:var(--red)!important}
+.empty{color:#777;text-align:center;padding:26px 8px;border-radius:24px;border:1px dashed #27272a;font-size:14px}
+.perps{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(165px,1fr);gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.perps::-webkit-scrollbar{display:none}
+.perp{height:178px;border-radius:27px;background:linear-gradient(180deg,#1f1f20,#1a1a1c);border:1px solid #242426;padding:20px 18px}
+.perp .coin-img{width:52px;height:52px;margin-bottom:19px}
+.perp-row{display:flex;align-items:center;gap:7px}.perp-sym{font-size:20px;font-weight:760}.lev{background:#28282a;border-radius:7px;padding:4px 7px;font-size:14px;color:#eee}.move{font-size:17px;font-weight:700;margin-top:12px}
+.pred-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pred{min-height:128px;border-radius:25px;background:linear-gradient(180deg,#1f1f20,#1a1a1c);border:1px solid #242426;padding:16px}.pred small{color:#8f8f94;font-weight:700}.pred strong{display:block;margin-top:15px;font-size:20px}.pred p{margin:8px 0 0;color:#8e8e93;font-size:13px}
+.bottom{position:fixed;z-index:40;left:50%;transform:translateX(-50%);bottom:0;width:min(900px,100%);padding:18px 18px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85) 30%,#000 52%)}
+.bottom-row{display:flex;align-items:center;gap:12px}.search{height:60px;flex:1;border-radius:30px;background:rgba(34,34,35,.96);border:1px solid #2b2b2d;display:flex;align-items:center;color:#858589;font-size:18px;padding:0 20px;backdrop-filter:blur(15px)}
+.search .mag{font-size:31px;font-weight:200;line-height:1;margin-right:12px;transform:rotate(-18deg)}
+.plus{width:60px;height:60px;border-radius:50%;border:0;background:var(--purple);color:#0d0d0f;font-size:43px;font-weight:280;line-height:1;padding:0 0 6px}
+.sheet{display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.68);align-items:flex-end;justify-content:center}.sheet.open{display:flex}
+.panel{width:min(900px,100%);max-height:86vh;overflow:auto;background:#151517;border:1px solid #303034;border-bottom:0;border-radius:29px 29px 0 0;padding:13px 18px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -22px 60px rgba(0,0,0,.55)}
+.handle{width:43px;height:5px;background:#4b4b50;border-radius:5px;margin:0 auto 17px}.panel h2{margin:0 0 5px;font-size:24px}.panel .hint{margin:0 0 16px;color:#8f8f94;font-size:13px;line-height:1.35}
+.field{display:grid;grid-template-columns:42px 1fr 125px;align-items:center;gap:11px;background:#202023;border:1px solid #2c2c30;border-radius:18px;padding:10px 12px;margin:9px 0}.field img{width:40px;height:40px;border-radius:50%;object-fit:cover}.field label b{display:block}.field label span{display:block;color:#89898e;font-size:12px;margin-top:2px}.field input{width:100%;border:0;outline:0;background:#101012;color:#fff;border-radius:11px;padding:11px 9px;text-align:right;font-size:15px}
+.actions{display:flex;gap:10px;margin-top:14px}.actions button{flex:1;border:0;border-radius:16px;padding:14px;font-weight:800}.cancel{background:#29292d;color:#eee}.save{background:var(--purple);color:#111}
+.toast{position:fixed;z-index:140;left:50%;bottom:116px;transform:translateX(-50%) translateY(15px);background:#242427;border:1px solid #3a3a3d;border-radius:14px;padding:10px 15px;font-weight:750;opacity:0;pointer-events:none;transition:.18s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:390px){.nav{gap:10px;padding-left:13px;padding-right:13px}.avatar{width:49px;height:49px;flex-basis:49px}.pill{padding:13px 18px;font-size:17px}.main{padding:0 14px}.balance{font-size:58px}.token{grid-template-columns:48px 1fr auto;padding:13px}.coin-img,.coin-fallback{width:46px;height:46px}.token-main strong{font-size:19px}.token-main span{font-size:14px}.token-side strong{font-size:18px}.perps{grid-auto-columns:160px}.bottom{padding-left:14px;padding-right:14px}}
+@media(min-width:700px){.main{padding-left:30px;padding-right:30px}.pred-wrap{grid-template-columns:repeat(4,1fr)}.perps{grid-auto-columns:220px}}
 </style>
 </head>
 <body>
+<div class="sim-badge">SIMULACIÓN</div>
 <div class="app">
-<header class="top"><nav class="nav"><div class="logo"><div class="ghost"><i></i></div></div><button class="pill active">Inicio</button><button class="pill">Operar</button><button class="pill">Predecir</button><button class="pill">Explorar</button><span class="sim">SIMULADOR</span></nav></header>
-<main>
-<section class="account"><div class="account-row"><div class="account-name">Cuenta 1⌄</div><button class="edit" id="edit1">Editar saldos</button></div><div class="balance" id="portfolio">$8.26</div><div class="sub"><span class="change" id="portfolioChange">$0.00 · 0.00%</span><span class="solEq" id="solEq">0.000000 SOL</span></div></section>
-<section class="section"><div class="cash"><div class="cashIcon">•</div><label>Cash</label><b>$0.00</b></div></section>
-<section class="section"><div class="section-head"><div class="section-title">Tokens ›</div><button class="edit" id="edit2">Editar</button></div><div class="tokens" id="tokens"></div></section>
-<section class="section"><div class="section-title">Perps ›</div><div class="perps" id="perps"></div></section>
-<section class="section"><div class="section-title">Predicciones ›</div><div class="preds" id="preds"></div></section>
-<div class="footnote">Datos de mercado: CoinGecko · actualización automática cada 30 s</div>
-</main>
+  <header class="header">
+    <nav class="nav" aria-label="Navegación">
+      <div class="avatar" aria-hidden="true"></div>
+      <button class="pill active">Inicio</button>
+      <button class="pill">Operar</button>
+      <button class="pill">Predecir</button>
+      <button class="pill">Explorar</button>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="account">
+      <div class="account-name">Cuenta 1 <span class="chev">⌄</span></div>
+      <div class="balance" id="portfolio" title="Toca para editar">$8.26</div>
+      <div class="dayline"><span id="deltaUsd">-$0.00032</span><span class="daypct" id="deltaPct">-0.00%</span></div>
+    </section>
+
+    <section class="section">
+      <div class="cash"><div class="cash-icon"><i></i><b></b></div><div class="cash-label">Cash</div><div class="cash-value">$0.00</div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="section-title">Tokens</div><div class="section-arrow">›</div></div>
+      <div class="tokens" id="tokens"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="section-title">Perps</div><div class="section-arrow">›</div></div>
+      <div class="perps" id="perps"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="section-title">Predicciones</div><div class="section-arrow">›</div></div>
+      <div class="pred-wrap" id="preds"></div>
+    </section>
+  </main>
 </div>
-<div class="bottom"><div class="warning">Simulación - No usar para engañar</div><div class="bottomrow"><div class="search">⌕&nbsp;&nbsp;Buscar en la simulación</div><button class="plus" id="plus">+</button></div></div>
-<div class="sheet" id="sheet"><div class="panel"><div class="handle"></div><h2>Editar saldos simulados</h2><div id="fields"></div><div class="actions"><button class="cancel" id="cancel">Cancelar</button><button class="save" id="save">Guardar</button></div></div></div>
+
+<div class="bottom"><div class="bottom-row"><div class="search"><span class="mag">⌕</span>Buscar Phantom</div><button class="plus" id="plus" aria-label="Añadir">+</button></div></div>
+
+<div class="sheet" id="sheet" aria-hidden="true"><div class="panel"><div class="handle"></div><h2>Editar cartera de simulación</h2><p class="hint">Los activos con saldo 0 no aparecen en la pantalla principal. Los cambios solo se guardan en este navegador.</p><div id="fields"></div><div class="actions"><button class="cancel" id="cancel">Cancelar</button><button class="save" id="save">Guardar</button></div></div></div>
 <div class="toast" id="toast">Actualizado</div>
+
 <script>
-const assets=[{id:'solana',symbol:'SOL',name:'Solana',cls:'sol',def:0},{id:'usd-coin',symbol:'USDC',name:'USD Coin',cls:'usdc',def:8.26449},{id:'bonk',symbol:'BONK',name:'Bonk',cls:'bonk',def:0},{id:'dogwifcoin',symbol:'WIF',name:'dogwifhat',cls:'wif',def:0}];
-const ids=[...assets.map(x=>x.id),'bitcoin','ethereum'];let prices={},bal={};try{bal=JSON.parse(localStorage.getItem('larpBalances')||'{}')}catch(e){}assets.forEach(a=>bal[a.id]=Number.isFinite(Number(bal[a.id]))?Number(bal[a.id]):a.def);
-const $=s=>document.querySelector(s);const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:n<1?4:2}).format(Number(n)||0);const qty=n=>{n=Number(n)||0;return Math.abs(n)>=1?n.toLocaleString('en-US',{maximumFractionDigits:6}):n.toLocaleString('en-US',{maximumFractionDigits:8})};const pct=n=>`${Number(n)>=0?'+':''}${(Number(n)||0).toFixed(2)}%`;
-function render(){let total=0,weighted=0,weight=0;$('#tokens').innerHTML='';assets.forEach(a=>{const p=prices[a.id]||{usd:a.id==='usd-coin'?1:0,usd_24h_change:0};const value=(bal[a.id]||0)*(p.usd||0);total+=value;weighted+=(p.usd_24h_change||0)*value;weight+=value;$('#tokens').insertAdjacentHTML('beforeend',`<div class="token"><div class="coin ${a.cls}">${a.symbol==='USDC'?'$':a.symbol[0]}</div><div><strong>${a.symbol}</strong><span class="meta">${qty(bal[a.id])} ${a.symbol} · ${money(p.usd||0)}</span></div><div class="side"><strong>${money(value)}</strong><span class="${(p.usd_24h_change||0)>=0?'pos':'neg'}">${pct(p.usd_24h_change||0)}</span></div></div>`)});$('#portfolio').textContent=money(total);const ch=weight?weighted/weight:0;$('#portfolioChange').textContent=`${pct(ch)} · 24h`;$('#portfolioChange').className=`change ${ch>=0?'pos':'neg'}`;$('#solEq').textContent=`${prices.solana?.usd?qty(total/prices.solana.usd):'0.000000'} SOL`;renderPerps();renderPreds()}
-function renderPerps(){const p=[['BTC','bitcoin','40x','btc'],['ETH','ethereum','25x','eth'],['SOL','solana','20x','solp']];$('#perps').innerHTML=p.map(([s,id,l,c])=>{const x=prices[id]||{};return `<div class="perp"><div class="perpIcon ${c}">${s==='BTC'?'₿':s==='ETH'?'◆':'S'}</div><b>${s} <span class="lev">${l}</span></b><div class="move ${(x.usd_24h_change||0)>=0?'pos':'neg'}">${pct(x.usd_24h_change||0)}</div><div class="meta">${money(x.usd||0)}</div></div>`}).join('')}
-function renderPreds(){const rows=[['SOL 24h','solana'],['BTC 24h','bitcoin'],['ETH 24h','ethereum'],['BONK 24h','bonk']];$('#preds').innerHTML=rows.map(([n,id])=>{const c=prices[id]?.usd_24h_change||0;return `<div class="pred"><small>${n}</small><strong class="${c>=0?'pos':'neg'}">${c>=0?'ALCISTA':'BAJISTA'}</strong><p>Movimiento real 24 h: ${pct(c)}</p></div>`}).join('')}
-async function fetchPrices(){try{const r=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids.join(',')}&vs_currencies=usd&include_24hr_change=true`,{cache:'no-store'});if(!r.ok)throw new Error();prices=await r.json();render();toast('Precios actualizados')}catch(e){render();toast('CoinGecko no disponible')}}
-function openSheet(){const f=$('#fields');f.innerHTML=assets.map(a=>`<div class="field"><label>${a.name} (${a.symbol})</label><input data-id="${a.id}" type="number" min="0" step="any" value="${bal[a.id]}"></div>`).join('');$('#sheet').classList.add('open')}function closeSheet(){$('#sheet').classList.remove('open')}function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>$('#toast').classList.remove('show'),1400)}
-$('#edit1').onclick=$('#edit2').onclick=$('#plus').onclick=openSheet;$('#cancel').onclick=closeSheet;$('#sheet').onclick=e=>{if(e.target===$('#sheet'))closeSheet()};$('#save').onclick=()=>{document.querySelectorAll('#fields input').forEach(i=>bal[i.dataset.id]=Math.max(0,Number(i.value)||0));localStorage.setItem('larpBalances',JSON.stringify(bal));closeSheet();render();toast('Saldos guardados')};render();fetchPrices();setInterval(fetchPrices,30000);
+const assets=[
+{id:'solana',symbol:'SOL',name:'Solana',def:0},
+{id:'usd-coin',symbol:'USDC',name:'USDC',def:8.26449},
+{id:'bitcoin',symbol:'BTC',name:'Bitcoin',def:0},
+{id:'ethereum',symbol:'ETH',name:'Ethereum',def:0},
+{id:'dogwifcoin',symbol:'WIF',name:'dogwifhat',def:0},
+{id:'bonk',symbol:'BONK',name:'Bonk',def:0}
+];
+const marketIds=assets.map(a=>a.id);
+const $=s=>document.querySelector(s);
+let market={};
+let bal={};
+try{bal=JSON.parse(localStorage.getItem('wallet-sim-balances')||localStorage.getItem('larpBalances')||'{}')}catch(e){bal={}}
+assets.forEach(a=>{const n=Number(bal[a.id]);bal[a.id]=Number.isFinite(n)?Math.max(0,n):a.def});
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:Math.abs(Number(n)||0)<.01?5:2}).format(Number(n)||0);
+const qty=n=>{n=Number(n)||0;if(Math.abs(n)>=1000000)return new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:3}).format(n);return n.toLocaleString('en-US',{maximumFractionDigits:8})};
+const pct=n=>`${Number(n)>=0?'+':''}${(Number(n)||0).toFixed(2)}%`;
+function imgFor(id){return market[id]?.image||''}
+function imgTag(id,symbol,cls='coin-img'){const src=imgFor(id);return src?`<img class="${cls}" src="${src}" alt="${symbol}" onerror="this.outerHTML='<div class=\'coin-fallback\'>${symbol[0]}</div>'">`:`<div class="coin-fallback">${symbol==='USDC'?'$':symbol[0]}</div>`}
+function render(){
+ let total=0,changeUsd=0;
+ const visible=assets.filter(a=>(bal[a.id]||0)>0);
+ visible.forEach(a=>{const m=market[a.id]||{};const value=(bal[a.id]||0)*(m.price??(a.id==='usd-coin'?1:0));total+=value;changeUsd+=value*((m.change||0)/100)});
+ $('#portfolio').textContent=money(total);
+ $('#deltaUsd').textContent=`${changeUsd>=0?'+':'-'}${money(Math.abs(changeUsd))}`;
+ const pc=total?changeUsd/(total-changeUsd||total)*100:0;
+ $('#deltaPct').textContent=pct(pc);
+ const neg=changeUsd<0;document.querySelector('.dayline').style.color=neg?'var(--red)':'var(--green)';$('#deltaPct').style.background=neg?'var(--red)':'var(--green)';
+ $('#tokens').innerHTML=visible.length?visible.map(a=>{const m=market[a.id]||{};const price=m.price??(a.id==='usd-coin'?1:0);const value=(bal[a.id]||0)*price;const c=m.change||0;return `<div class="token">${imgTag(a.id,a.symbol)}<div class="token-main"><strong>${a.symbol}</strong><span>${qty(bal[a.id])} ${a.symbol}</span></div><div class="token-side"><strong>${money(value)}</strong><span class="${c>=0?'pos':'neg'}">${pct(c)}</span></div></div>`}).join(''):`<div class="empty">No hay tokens con saldo</div>`;
+ renderPerps();renderPreds();
+}
+function renderPerps(){const rows=[['BTC','bitcoin','40x'],['ETH','ethereum','25x'],['SOL','solana','20x']];$('#perps').innerHTML=rows.map(([s,id,l])=>{const m=market[id]||{};return `<div class="perp">${imgTag(id,s)}<div class="perp-row"><span class="perp-sym">${s}</span><span class="lev">${l}</span></div><div class="move ${(m.change||0)>=0?'pos':'neg'}">${pct(m.change||0)}</div></div>`}).join('')}
+function renderPreds(){const rows=[['BTC','bitcoin'],['SOL','solana'],['ETH','ethereum'],['BONK','bonk']];$('#preds').innerHTML=rows.map(([s,id])=>{const c=market[id]?.change||0;return `<div class="pred"><small>${s} 24h</small><strong class="${c>=0?'pos':'neg'}">${c>=0?'ALCISTA':'BAJISTA'}</strong><p>${pct(c)} en 24 h</p></div>`}).join('')}
+async function fetchPrices(){try{const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${marketIds.join(',')}&price_change_percentage=24h`,{cache:'no-store'});if(!r.ok)throw new Error('feed');const data=await r.json();data.forEach(x=>market[x.id]={price:x.current_price,change:x.price_change_percentage_24h||0,image:x.image});render()}catch(e){render()}}
+function openSheet(){const host=$('#fields');host.innerHTML=assets.map(a=>`<div class="field">${imgTag(a.id,a.symbol,'')}<label><b>${a.symbol}</b><span>${a.name}</span></label><input type="number" min="0" step="any" inputmode="decimal" data-id="${a.id}" value="${bal[a.id]||0}"></div>`).join('');host.querySelectorAll('img').forEach(i=>i.style.cssText='width:40px;height:40px;border-radius:50%;object-fit:cover');$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false')}
+function closeSheet(){$('#sheet').classList.remove('open');$('#sheet').setAttribute('aria-hidden','true')}
+function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>$('#toast').classList.remove('show'),1200)}
+$('#portfolio').onclick=openSheet;
+$('#plus').onclick=openSheet;
+$('#cancel').onclick=closeSheet;
+$('#sheet').onclick=e=>{if(e.target===$('#sheet'))closeSheet()};
+$('#save').onclick=()=>{document.querySelectorAll('#fields input').forEach(i=>bal[i.dataset.id]=Math.max(0,Number(i.value)||0));localStorage.setItem('wallet-sim-balances',JSON.stringify(bal));closeSheet();render();toast('Guardado')};
+render();fetchPrices();setInterval(fetchPrices,30000);
 </script>
 </body>
 </html>
