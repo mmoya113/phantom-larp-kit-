@@ -38,7 +38,7 @@ button,input{font:inherit}
 .cash-label{font-size:18px;font-weight:560;margin-left:16px;letter-spacing:-.15px}.cash-value{margin-left:auto;font-size:18px;font-weight:400;letter-spacing:-.15px}
 .section-head{display:flex;align-items:center;margin:23px 0 9px}.section-title{font-size:24px;font-weight:580;letter-spacing:-.65px}.section-arrow{font-size:29px;color:#a5a5aa;font-weight:280;margin-left:5px;line-height:.7;transform:translateY(-1px)}
 .tokens{display:flex;flex-direction:column;gap:7px}.token{height:69px;border:1px solid var(--stroke);background:linear-gradient(#1e1e20,#19191b);border-radius:21px;display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:10px;padding:0 14px}
-.coin-img{width:40px;height:40px;border-radius:50%;display:block;overflow:hidden;background:#29292c;flex:0 0 40px}.coin-img svg{display:block;width:100%;height:100%}.token-main{min-width:0}.token-main strong{display:block;font-size:17px;font-weight:560;line-height:1.05;letter-spacing:-.15px}.token-main span{display:block;color:#9b9ba0;font-size:13px;font-weight:400;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}.token-side{text-align:right}.token-side strong{display:block;font-size:16px;font-weight:400;letter-spacing:-.1px}.token-side span{display:block;margin-top:4px;font-size:12px;font-weight:430}.empty{color:#777;padding:18px 8px;text-align:center;border:1px dashed #252528;border-radius:19px;font-size:12px}
+.coin-img{width:40px;height:40px;border-radius:50%;display:block;overflow:hidden;background:#29292c;flex:0 0 40px}.coin-img svg{display:block;width:100%;height:100%}.coin-img img{display:block;width:100%;height:100%;object-fit:cover}.token-main{min-width:0}.token-main strong{display:block;font-size:17px;font-weight:560;line-height:1.05;letter-spacing:-.15px}.token-main span{display:block;color:#9b9ba0;font-size:13px;font-weight:400;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}.token-side{text-align:right}.token-side strong{display:block;font-size:16px;font-weight:400;letter-spacing:-.1px}.token-side span{display:block;margin-top:4px;font-size:12px;font-weight:430}.empty{color:#777;padding:18px 8px;text-align:center;border:1px dashed #252528;border-radius:19px;font-size:12px}
 .perps{display:grid;grid-auto-flow:column;grid-auto-columns:145px;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.perps::-webkit-scrollbar{display:none}.perp{height:132px;border:1px solid var(--stroke);background:linear-gradient(#1e1e20,#19191b);border-radius:22px;padding:14px}.perp .coin-img{width:42px;height:42px;margin-bottom:12px}.perp-row{display:flex;align-items:center;gap:5px}.perp-sym{font-size:17px;font-weight:560}.lev{background:#28282a;border-radius:6px;padding:3px 6px;font-size:11px;font-weight:500;color:#e8e8eb}.move{font-size:14px;font-weight:500;margin-top:9px}
 .pred-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pred{min-height:96px;border:1px solid var(--stroke);background:linear-gradient(#1e1e20,#19191b);border-radius:20px;padding:13px}.pred small{color:#8f8f94;font-size:11px;font-weight:500}.pred strong{display:block;margin-top:10px;font-size:15px;font-weight:560}.pred p{margin:5px 0 0;color:#8f8f94;font-size:10px;line-height:1.3}
 .bottom{position:fixed;z-index:50;left:50%;transform:translateX(-50%);bottom:0;width:min(430px,100%);padding:9px 19px calc(9px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.88) 27%,#000 54%)}.bottom-row{display:flex;align-items:center;gap:10px}.search{height:47px;flex:1;border:1px solid #29292b;border-radius:25px;background:rgba(32,32,33,.96);display:flex;align-items:center;color:#85858a;padding:0 16px;font-size:15px;font-weight:400;backdrop-filter:blur(15px)}.mag{position:relative;width:19px;height:19px;margin-right:9px;flex:0 0 19px}.mag:before{content:"";position:absolute;width:11px;height:11px;border:2px solid #8a8a8f;border-radius:50%;left:0;top:0}.mag:after{content:"";position:absolute;width:7px;height:2px;background:#8a8a8f;border-radius:2px;transform:rotate(45deg);left:11px;top:12px}.plus{width:47px;height:47px;flex:0 0 47px;border-radius:50%;border:0;background:var(--purple);color:#0c0c0e;position:relative}.plus:before,.plus:after{content:"";position:absolute;background:#0c0c0e;border-radius:2px;left:50%;top:50%;transform:translate(-50%,-50%)}.plus:before{width:24px;height:2.5px}.plus:after{width:2.5px;height:24px}
@@ -58,7 +58,7 @@ button,input{font:inherit}
 <section class="section"><div class="section-head"><div class="section-title">Predicciones</div><div class="section-arrow">›</div></div><div class="pred-wrap" id="preds"></div></section>
 </main>
 </div>
-<div class="bottom"><div class="bottom-row"><div class="search"><span class="mag"></span>Buscar Wallet</div><button class="plus" id="plus" aria-label="Añadir"></button></div></div>
+<div class="bottom"><div class="bottom-row"><div class="search"><span class="mag"></span>Buscar Phantom</div><button class="plus" id="plus" aria-label="Añadir"></button></div></div>
 <div class="sheet" id="sheet" aria-hidden="true"><div class="panel"><div class="handle"></div><h2>Editar cartera de simulación</h2><p class="hint">Los activos con saldo 0 no aparecen. Los saldos se guardan solo en este navegador.</p><div id="fields"></div><div class="actions"><button class="cancel" id="cancel">Cancelar</button><button class="save" id="save">Guardar</button></div></div></div>
 <div class="toast" id="toast">Actualizado</div>
 <script>
@@ -72,15 +72,18 @@ const assets=[
 ];
 const ids=assets.map(a=>a.id).join(',');
 const $=s=>document.querySelector(s);
-let bal={},prices={},fetching=false;
+let bal={},prices={},logos={},fetching=false;
 try{bal=JSON.parse(localStorage.getItem('wallet-sim-balances')||localStorage.getItem('larpBalances')||'{}')}catch(e){bal={}}
 try{prices=JSON.parse(localStorage.getItem('wallet-sim-prices')||'{}')}catch(e){prices={}}
+try{logos=JSON.parse(localStorage.getItem('wallet-sim-logos')||'{}')}catch(e){logos={}}
 assets.forEach(a=>{const n=Number(bal[a.id]);bal[a.id]=Number.isFinite(n)?Math.max(0,n):a.def});
 if(!prices['usd-coin']) prices['usd-coin']={usd:1,change:0,ts:Date.now()};
-const money=n=>{n=Number(n)||0;return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:Math.abs(n)<.01?5:2}).format(n)};
+const money=n=>{n=Number(n)||0;return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:Math.abs(n)<.01?6:2}).format(n)};
 const qty=n=>(Number(n)||0).toLocaleString('en-US',{maximumFractionDigits:8});
 const pct=n=>`${Number(n)>=0?'+':''}${(Number(n)||0).toFixed(2)}%`;
+const usdDelta=n=>{n=Number(n)||0;const sign=n<0?'-':'+';const abs=Math.abs(n);return abs<0.01&&abs>0?`${sign}<$0.01`:`${sign}${money(abs)}`};
 function logo(id){
+ if(logos[id])return `<span class="coin-img"><img src="${logos[id]}" alt="" loading="lazy" referrerpolicy="no-referrer"></span>`;
  const common='viewBox="0 0 64 64" aria-hidden="true" focusable="false"';
  if(id==='bitcoin')return `<span class="coin-img"><svg ${common}><circle cx="32" cy="32" r="32" fill="#F7931A"/><text x="32" y="43" text-anchor="middle" font-size="34" font-weight="700" fill="white" font-family="Arial">₿</text></svg></span>`;
  if(id==='ethereum')return `<span class="coin-img"><svg ${common}><circle cx="32" cy="32" r="32" fill="#E8E8EA"/><path d="M32 8 19 32l13 8 13-8L32 8Z" fill="#34383F"/><path d="m19 35 13 20 13-20-13 8-13-8Z" fill="#555B64"/></svg></span>`;
@@ -99,8 +102,9 @@ function render(){
  visible.forEach(a=>{
    const price=getPrice(a.id),ch=getChange(a.id),known=price!==null;
    const value=known?(bal[a.id]||0)*price:null;
+   const valDelta=(known&&ch!==null)?value*(ch/100):null;
    if(known){total+=value;weight+=value;if(ch!==null)weighted+=ch*value}else missing=true;
-   $('#tokens').insertAdjacentHTML('beforeend',`<div class="token">${logo(a.id)}<div class="token-main"><strong>${a.symbol}</strong><span>${qty(bal[a.id])} ${a.symbol}</span></div><div class="token-side"><strong>${value===null?'—':money(value)}</strong><span class="${ch===null?'loading':ch>=0?'pos':'neg'}">${ch===null?'—':pct(ch)}</span></div></div>`);
+   $('#tokens').insertAdjacentHTML('beforeend',`<div class="token">${logo(a.id)}<div class="token-main"><strong>${a.symbol}</strong><span>${qty(bal[a.id])} ${a.symbol}</span></div><div class="token-side"><strong>${value===null?'—':money(value)}</strong><span class="${valDelta===null?'loading':valDelta>=0?'pos':'neg'}">${valDelta===null?'—':usdDelta(valDelta)}</span></div></div>`);
  });
  $('#portfolio').textContent=missing?'…':money(total);
  if(missing||!weight){$('#deltaUsd').textContent=missing?'Cargando…':'$0.00';$('#deltaUsd').className='loading';$('#deltaPct').textContent='—';$('#deltaPct').className='daypct loading'}
@@ -112,11 +116,16 @@ function renderPreds(){const list=[['SOL 24h','solana'],['BTC 24h','bitcoin'],['
 async function refreshPrices(){
  if(fetching)return;fetching=true;
  try{
-   const url=`https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(ids)}&vs_currencies=usd&include_24hr_change=true&precision=full&_=${Date.now()}`;
+   const url=`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${encodeURIComponent(ids)}&price_change_percentage=24h&precision=full&_=${Date.now()}`;
    const r=await fetch(url,{cache:'no-store',headers:{accept:'application/json'}});if(!r.ok)throw new Error(`HTTP ${r.status}`);
-   const data=await r.json();let received=0;
-   assets.forEach(a=>{const row=data[a.id];if(row&&Number.isFinite(Number(row.usd))){prices[a.id]={usd:Number(row.usd),change:Number.isFinite(Number(row.usd_24h_change))?Number(row.usd_24h_change):0,ts:Date.now()};received++}});
-   if(received){localStorage.setItem('wallet-sim-prices',JSON.stringify(prices));render()}
+   const data=await r.json();let received=0,gotLogo=false;
+   data.forEach(row=>{
+     if(!row||!row.id||!Number.isFinite(Number(row.current_price)))return;
+     prices[row.id]={usd:Number(row.current_price),change:Number.isFinite(Number(row.price_change_percentage_24h))?Number(row.price_change_percentage_24h):0,ts:Date.now()};
+     received++;
+     if(row.image){logos[row.id]=row.image;gotLogo=true}
+   });
+   if(received){localStorage.setItem('wallet-sim-prices',JSON.stringify(prices));if(gotLogo)localStorage.setItem('wallet-sim-logos',JSON.stringify(logos));render()}
  }catch(e){render()}finally{fetching=false}
 }
 function renderFields(){$('#fields').innerHTML=assets.map(a=>`<div class="field">${logo(a.id)}<label><b>${a.name}</b><span>${a.symbol}</span></label><input inputmode="decimal" data-id="${a.id}" type="number" min="0" step="any" value="${bal[a.id]||0}"></div>`).join('')}
