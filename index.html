@@ -7,53 +7,53 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Wallet Sim">
+<meta name="format-detection" content="telephone=no">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
-<title>Wallet Simulator</title>
+<title>Wallet Sim</title>
 <style>
-:root{--bg:#000;--card:#1c1c1e;--cardBorder:#242426;--text:#f4f4f5;--muted:#98989d;--purple:#a99cf8;--green:#54da79;--red:#ff474f}
+:root{--bg:#000;--card:#1a1a1c;--card2:#1e1e20;--stroke:#252527;--text:#f5f5f7;--muted:#99999f;--purple:#aaa0f6;--green:#59d97d;--red:#ff4a52}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:#000;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-body{min-height:100vh;overflow-x:hidden}
+html,body{margin:0;background:#000;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{min-height:100vh;overflow-x:hidden;font-weight:400}
 button,input{font:inherit}
-.app{width:100%;max-width:430px;min-height:100vh;margin:0 auto;padding:calc(env(safe-area-inset-top) + 3px) 0 calc(92px + env(safe-area-inset-bottom));background:#000}
-.header{height:82px;display:flex;align-items:center;overflow:hidden;background:#000;border-bottom:1px solid #101010}
-.nav{display:flex;align-items:center;gap:9px;padding:0 14px;width:max-content;min-width:100%;overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}
-.avatar{width:43px;height:43px;flex:0 0 43px;border-radius:50%;background:linear-gradient(145deg,#69cca2 0 48%,#fff1ad 48%);position:relative}
-.avatar:before{content:"";position:absolute;left:7px;top:10px;width:29px;height:8px;border-radius:999px;background:#1a1a1d;transform:rotate(-13deg)}
-.avatar:after{content:"≻≺";position:absolute;left:10px;bottom:4px;color:#17171a;font-size:11px;font-weight:900;letter-spacing:-2px}
-.pill{height:43px;border:0;border-radius:24px;background:#202020;color:#a7a7ab;padding:0 18px;font-size:17px;font-weight:650;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
-.pill.active{background:var(--purple);color:#121214}
-.simmark{position:fixed;z-index:90;right:8px;bottom:calc(72px + env(safe-area-inset-bottom));font-size:9px;font-weight:900;letter-spacing:.09em;color:#d4cdfd;background:rgba(25,22,39,.88);border:1px solid rgba(169,156,248,.45);border-radius:999px;padding:4px 7px;pointer-events:none}
-.main{padding:0 20px}
-.account{padding:24px 0 16px}
-.account-name{color:#a5a5aa;font-size:17px;font-weight:700;line-height:1;margin-bottom:18px}.account-name .chev{font-size:23px;font-weight:300;vertical-align:-2px}
-.balance{display:inline-block;font-size:52px;line-height:.94;font-weight:780;letter-spacing:-3.7px;cursor:pointer;user-select:none}
-.balance:active{opacity:.72}
-.dayline{display:flex;align-items:center;gap:8px;margin-top:13px;color:var(--red);font-size:18px;font-weight:760;line-height:1}.daypct{background:var(--red);color:#151517;border-radius:7px;padding:5px 8px 4px}
-.section{margin-top:16px}
-.cash{height:73px;border:1px solid var(--cardBorder);background:linear-gradient(#1d1d1f,#1a1a1c);border-radius:24px;display:flex;align-items:center;padding:0 20px}
-.cash-icon{width:36px;height:28px;position:relative;flex:0 0 36px}.cash-icon:before{content:"";position:absolute;inset:2px 0;border-radius:6px;background:#9d9ea4}.cash-icon:after{content:"";position:absolute;left:12px;top:8px;width:12px;height:12px;border-radius:50%;background:#4f5055;box-shadow:-10px 0 0 -4px #4f5055,10px 0 0 -4px #4f5055}
-.cash-label{font-size:19px;font-weight:760;margin-left:17px}.cash-value{margin-left:auto;font-size:19px;font-weight:430}
-.section-head{display:flex;align-items:center;margin:25px 0 10px}.section-title{font-size:26px;font-weight:810;letter-spacing:-.7px}.section-arrow{font-size:34px;color:#a5a5aa;font-weight:300;margin-left:6px;line-height:.7}
-.tokens{display:flex;flex-direction:column;gap:8px}
-.token{height:73px;border:1px solid var(--cardBorder);background:linear-gradient(#1d1d1f,#1a1a1c);border-radius:23px;display:grid;grid-template-columns:43px 1fr auto;align-items:center;gap:11px;padding:0 16px}
-.coin-img,.coin-fallback{width:43px;height:43px;border-radius:50%;object-fit:cover;background:#2a2a2d}.coin-fallback{display:grid;place-items:center;font-weight:900}
-.token-main strong{display:block;font-size:18px;font-weight:760;line-height:1.05}.token-main span{display:block;color:#9b9ba0;font-size:14px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
-.token-side{text-align:right}.token-side strong{display:block;font-size:17px;font-weight:470}.token-side span{display:block;margin-top:5px;font-size:13px}
+.app{width:100%;max-width:430px;min-height:100vh;margin:0 auto;padding:calc(env(safe-area-inset-top) + 1px) 0 calc(84px + env(safe-area-inset-bottom));background:#000}
+.header{height:75px;display:flex;align-items:center;background:#000;border-bottom:1px solid #0f0f10;overflow:hidden}
+.nav{width:max-content;min-width:100%;height:100%;display:flex;align-items:center;gap:8px;padding:0 13px;overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}
+.avatar{position:relative;flex:0 0 39px;width:39px;height:39px;border-radius:50%;background:linear-gradient(145deg,#78d7af 0 48%,#b0a2fa 48% 74%,#fff0ad 74%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.avatar:before{content:"";position:absolute;left:8px;top:11px;width:24px;height:7px;border-radius:999px;background:#17171b;transform:rotate(-11deg)}
+.avatar:after{content:"SIM";position:absolute;left:0;right:0;bottom:5px;text-align:center;color:#17171b;font-size:7px;font-weight:800;letter-spacing:.9px}
+.pill{height:39px;border:0;border-radius:21px;background:#1f1f20;color:#aaaab0;padding:0 16px;white-space:nowrap;font-size:16px;font-weight:500;letter-spacing:-.15px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
+.pill.active{background:var(--purple);color:#111113;font-weight:520}
+.simmark{position:fixed;z-index:90;right:8px;bottom:calc(66px + env(safe-area-inset-bottom));font-size:8px;font-weight:700;letter-spacing:.08em;color:#d8d2fb;background:rgba(26,22,40,.9);border:1px solid rgba(170,160,246,.42);border-radius:999px;padding:4px 7px;pointer-events:none}
+.main{padding:0 19px}
+.account{padding:23px 0 14px}
+.account-name{color:#a5a5aa;font-size:16px;font-weight:500;line-height:1;margin-bottom:17px;letter-spacing:-.1px}.account-name .chev{display:inline-block;font-size:20px;font-weight:300;vertical-align:-1px;margin-left:2px;transform:translateY(-1px)}
+.balance{display:inline-block;font-size:49px;line-height:.94;font-weight:600;letter-spacing:-3.35px;cursor:pointer;user-select:none}.balance:active{opacity:.7}
+.dayline{display:flex;align-items:center;gap:7px;margin-top:12px;color:var(--red);font-size:16px;font-weight:550;line-height:1}.daypct{background:var(--red);color:#111113;border-radius:7px;padding:4px 7px 4px;font-weight:560}
+.section{margin-top:15px}
+.cash{height:68px;border:1px solid var(--stroke);background:linear-gradient(#1d1d1f,#19191b);border-radius:22px;display:flex;align-items:center;padding:0 18px}
+.cash-icon{width:34px;height:25px;position:relative;flex:0 0 34px}.cash-icon:before{content:"";position:absolute;inset:1px 0;border-radius:5px;background:#9b9ca2}.cash-icon:after{content:"";position:absolute;left:12px;top:7px;width:10px;height:10px;border-radius:50%;background:#4e4f53;box-shadow:-10px 0 0 -3px #4e4f53,10px 0 0 -3px #4e4f53}
+.cash-label{font-size:18px;font-weight:560;margin-left:16px;letter-spacing:-.15px}.cash-value{margin-left:auto;font-size:18px;font-weight:400;letter-spacing:-.15px}
+.section-head{display:flex;align-items:center;margin:23px 0 9px}.section-title{font-size:24px;font-weight:580;letter-spacing:-.65px}.section-arrow{font-size:29px;color:#a5a5aa;font-weight:280;margin-left:5px;line-height:.7;transform:translateY(-1px)}
+.tokens{display:flex;flex-direction:column;gap:7px}
+.token{height:69px;border:1px solid var(--stroke);background:linear-gradient(#1d1d1f,#19191b);border-radius:21px;display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:10px;padding:0 14px}
+.coin-img,.coin-fallback{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#29292c}.coin-fallback{display:grid;place-items:center;font-size:13px;font-weight:650}
+.token-main{min-width:0}.token-main strong{display:block;font-size:17px;font-weight:560;line-height:1.05;letter-spacing:-.15px}.token-main span{display:block;color:#9b9ba0;font-size:13px;font-weight:400;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.token-side{text-align:right}.token-side strong{display:block;font-size:16px;font-weight:400;letter-spacing:-.1px}.token-side span{display:block;margin-top:4px;font-size:12px;font-weight:430}
 .pos{color:var(--green)!important}.neg{color:var(--red)!important}
-.empty{color:#777;padding:20px 8px;text-align:center;border:1px dashed #252528;border-radius:21px;font-size:13px}
-.perps{display:grid;grid-auto-flow:column;grid-auto-columns:158px;gap:9px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.perps::-webkit-scrollbar{display:none}
-.perp{height:143px;border:1px solid var(--cardBorder);background:linear-gradient(#1d1d1f,#1a1a1c);border-radius:24px;padding:16px}
-.perp .coin-img{width:46px;height:46px;margin-bottom:14px}.perp-row{display:flex;align-items:center;gap:6px}.perp-sym{font-size:18px;font-weight:760}.lev{background:#29292b;border-radius:7px;padding:4px 6px 3px;font-size:12px;color:#eee}.move{font-size:15px;font-weight:700;margin-top:10px}
-.pred-wrap{display:grid;grid-template-columns:1fr 1fr;gap:9px}.pred{min-height:105px;border:1px solid var(--cardBorder);background:linear-gradient(#1d1d1f,#1a1a1c);border-radius:22px;padding:14px}.pred small{color:#8f8f94;font-size:12px;font-weight:700}.pred strong{display:block;margin-top:11px;font-size:17px}.pred p{margin:6px 0 0;color:#8f8f94;font-size:11px}
-.bottom{position:fixed;z-index:50;left:50%;transform:translateX(-50%);bottom:0;width:min(430px,100%);padding:11px 20px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.86) 28%,#000 53%)}
-.bottom-row{display:flex;align-items:center;gap:11px}.search{height:51px;flex:1;border:1px solid #2a2a2c;border-radius:27px;background:rgba(33,33,34,.96);display:flex;align-items:center;color:#86868a;padding:0 17px;font-size:16px;backdrop-filter:blur(15px)}.mag{font-size:27px;font-weight:200;line-height:1;margin-right:10px;transform:rotate(-18deg)}
-.plus{width:51px;height:51px;flex:0 0 51px;border-radius:50%;border:0;background:var(--purple);color:#0c0c0e;font-size:37px;font-weight:260;line-height:1;padding:0 0 5px}
-.sheet{display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.7);align-items:flex-end;justify-content:center}.sheet.open{display:flex}.panel{width:min(430px,100%);max-height:84vh;overflow:auto;background:#151517;border:1px solid #303034;border-bottom:0;border-radius:27px 27px 0 0;padding:13px 17px calc(22px + env(safe-area-inset-bottom))}.handle{width:41px;height:5px;background:#4b4b4f;border-radius:4px;margin:0 auto 15px}.panel h2{margin:0 0 4px;font-size:22px}.hint{margin:0 0 14px;color:#8f8f94;font-size:12px;line-height:1.35}.field{display:grid;grid-template-columns:38px 1fr 112px;gap:10px;align-items:center;background:#202023;border:1px solid #2c2c30;border-radius:17px;padding:9px 11px;margin:8px 0}.field img{width:36px;height:36px;border-radius:50%;object-fit:cover}.field b{display:block;font-size:14px}.field span{display:block;color:#88888d;font-size:11px;margin-top:2px}.field input{width:100%;border:0;outline:0;background:#101012;color:#fff;border-radius:10px;padding:9px 8px;text-align:right;font-size:14px}.actions{display:flex;gap:9px;margin-top:13px}.actions button{flex:1;border:0;border-radius:15px;padding:13px;font-weight:800}.cancel{background:#29292d;color:#eee}.save{background:var(--purple);color:#111}
-.toast{position:fixed;z-index:140;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(12px);background:#242427;border:1px solid #39393d;border-radius:13px;padding:9px 13px;font-size:12px;font-weight:750;opacity:0;pointer-events:none;transition:.17s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(min-width:431px){.app{box-shadow:0 0 0 1px #0e0e0f}.main{padding-left:22px;padding-right:22px}}
+.empty{color:#777;padding:18px 8px;text-align:center;border:1px dashed #252528;border-radius:19px;font-size:12px}
+.perps{display:grid;grid-auto-flow:column;grid-auto-columns:145px;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.perps::-webkit-scrollbar{display:none}
+.perp{height:132px;border:1px solid var(--stroke);background:linear-gradient(#1d1d1f,#19191b);border-radius:22px;padding:14px}
+.perp .coin-img{width:42px;height:42px;margin-bottom:12px}.perp-row{display:flex;align-items:center;gap:5px}.perp-sym{font-size:17px;font-weight:560}.lev{background:#28282a;border-radius:6px;padding:3px 6px;font-size:11px;font-weight:500;color:#e8e8eb}.move{font-size:14px;font-weight:500;margin-top:9px}
+.pred-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pred{min-height:96px;border:1px solid var(--stroke);background:linear-gradient(#1d1d1f,#19191b);border-radius:20px;padding:13px}.pred small{color:#8f8f94;font-size:11px;font-weight:500}.pred strong{display:block;margin-top:10px;font-size:15px;font-weight:560}.pred p{margin:5px 0 0;color:#8f8f94;font-size:10px;line-height:1.3}
+.bottom{position:fixed;z-index:50;left:50%;transform:translateX(-50%);bottom:0;width:min(430px,100%);padding:9px 19px calc(9px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.88) 27%,#000 54%)}
+.bottom-row{display:flex;align-items:center;gap:10px}.search{height:47px;flex:1;border:1px solid #29292b;border-radius:25px;background:rgba(32,32,33,.96);display:flex;align-items:center;color:#85858a;padding:0 16px;font-size:15px;font-weight:400;backdrop-filter:blur(15px)}.mag{position:relative;width:19px;height:19px;margin-right:9px;flex:0 0 19px}.mag:before{content:"";position:absolute;width:11px;height:11px;border:2px solid #8a8a8f;border-radius:50%;left:0;top:0}.mag:after{content:"";position:absolute;width:7px;height:2px;background:#8a8a8f;border-radius:2px;transform:rotate(45deg);left:11px;top:12px}
+.plus{width:47px;height:47px;flex:0 0 47px;border-radius:50%;border:0;background:var(--purple);color:#0c0c0e;position:relative}.plus:before,.plus:after{content:"";position:absolute;background:#0c0c0e;border-radius:2px;left:50%;top:50%;transform:translate(-50%,-50%)}.plus:before{width:24px;height:2.5px}.plus:after{width:2.5px;height:24px}
+.sheet{display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.72);align-items:flex-end;justify-content:center}.sheet.open{display:flex}.panel{width:min(430px,100%);max-height:82vh;overflow:auto;background:#151517;border:1px solid #303034;border-bottom:0;border-radius:25px 25px 0 0;padding:12px 16px calc(20px + env(safe-area-inset-bottom))}.handle{width:39px;height:4px;background:#4b4b4f;border-radius:4px;margin:0 auto 14px}.panel h2{margin:0 0 4px;font-size:20px;font-weight:600}.hint{margin:0 0 13px;color:#8f8f94;font-size:11px;line-height:1.35}.field{display:grid;grid-template-columns:35px 1fr 108px;gap:9px;align-items:center;background:#202023;border:1px solid #2c2c30;border-radius:16px;padding:8px 10px;margin:7px 0}.field img{width:34px;height:34px;border-radius:50%;object-fit:cover}.field b{display:block;font-size:13px;font-weight:560}.field span{display:block;color:#88888d;font-size:10px;margin-top:2px}.field input{width:100%;border:0;outline:0;background:#101012;color:#fff;border-radius:9px;padding:8px 7px;text-align:right;font-size:13px}.actions{display:flex;gap:8px;margin-top:12px}.actions button{flex:1;border:0;border-radius:14px;padding:12px;font-weight:600}.cancel{background:#29292d;color:#eee}.save{background:var(--purple);color:#111}
+.toast{position:fixed;z-index:140;left:50%;bottom:calc(79px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);background:#242427;border:1px solid #39393d;border-radius:12px;padding:8px 12px;font-size:11px;font-weight:550;opacity:0;pointer-events:none;transition:.16s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:431px){.app{box-shadow:0 0 0 1px #0e0e0f}}
 </style>
 </head>
 <body>
@@ -68,7 +68,7 @@ button,input{font:inherit}
 <section class="section"><div class="section-head"><div class="section-title">Predicciones</div><div class="section-arrow">›</div></div><div class="pred-wrap" id="preds"></div></section>
 </main>
 </div>
-<div class="bottom"><div class="bottom-row"><div class="search"><span class="mag">⌕</span>Buscar Phantom</div><button class="plus" id="plus" aria-label="Añadir">+</button></div></div>
+<div class="bottom"><div class="bottom-row"><div class="search"><span class="mag"></span>Buscar Wallet</div><button class="plus" id="plus" aria-label="Añadir"></button></div></div>
 <div class="sheet" id="sheet" aria-hidden="true"><div class="panel"><div class="handle"></div><h2>Editar cartera de simulación</h2><p class="hint">Los activos con saldo 0 no aparecen. Los saldos se guardan solo en este navegador.</p><div id="fields"></div><div class="actions"><button class="cancel" id="cancel">Cancelar</button><button class="save" id="save">Guardar</button></div></div></div>
 <div class="toast" id="toast">Actualizado</div>
 <script>
@@ -93,23 +93,44 @@ function render(){
  let total=0,weighted=0,weight=0;
  const visible=assets.filter(a=>(bal[a.id]||0)>0);
  $('#tokens').innerHTML=visible.length?'':'<div class="empty">No hay tokens con saldo.</div>';
- visible.forEach(a=>{const m=market[a.id]||{};const price=Number(m.current_price)|| (a.id==='usd-coin'?1:0);const value=(bal[a.id]||0)*price;const ch=Number(m.price_change_percentage_24h)||0;total+=value;weighted+=ch*value;weight+=value;$('#tokens').insertAdjacentHTML('beforeend',`<div class="token">${imgFor(a.id)?`<img class="coin-img" src="${imgFor(a.id)}" alt="">`:`<div class="coin-fallback">${a.symbol[0]}</div>`}<div class="token-main"><strong>${a.symbol}</strong><span>${qty(bal[a.id])} ${a.symbol}</span></div><div class="token-side"><strong>${money(value)}</strong><span class="${ch>=0?'pos':'neg'}">${pct(ch)}</span></div></div>`)});
+ visible.forEach(a=>{
+  const m=market[a.id]||{};const price=Number(m.current_price)||(a.id==='usd-coin'?1:0);const value=(bal[a.id]||0)*price;const ch=Number(m.price_change_percentage_24h)||0;
+  total+=value;weighted+=ch*value;weight+=value;
+  $('#tokens').insertAdjacentHTML('beforeend',`<div class="token">${imgFor(a.id)?`<img class="coin-img" src="${imgFor(a.id)}" alt="">`:`<div class="coin-fallback">${a.symbol[0]}</div>`}<div class="token-main"><strong>${a.symbol}</strong><span>${qty(bal[a.id])} ${a.symbol}</span></div><div class="token-side"><strong>${money(value)}</strong><span class="${ch>=0?'pos':'neg'}">${pct(ch)}</span></div></div>`)
+ });
  $('#portfolio').textContent=money(total);
- const ch=weight?weighted/weight:0;const delta=total*(ch/100)/(1+(ch/100)||1);
- $('#deltaUsd').textContent=`${delta<0?'-':'+'}${money(Math.abs(delta))}`;$('#deltaUsd').className=ch>=0?'pos':'neg';$('#deltaPct').textContent=pct(ch);$('#deltaPct').style.background=ch>=0?'var(--green)':'var(--red)';
- renderPerps();renderPreds();
+ const ch=weight?weighted/weight:0;const delta=total*(ch/100);
+ $('#deltaUsd').textContent=`${delta>=0?'+':'-'}${money(Math.abs(delta))}`;
+ $('#deltaPct').textContent=pct(ch);
+ const cls=ch>=0?'pos':'neg';$('#deltaUsd').className=cls;$('#deltaPct').className=`daypct ${cls}`;
+ renderPerps();renderPreds();renderFieldsIfOpen();
 }
-function renderPerps(){const rows=[['BTC','bitcoin','40x'],['ETH','ethereum','25x'],['SOL','solana','20x']];$('#perps').innerHTML=rows.map(([s,id,l])=>{const m=market[id]||{};const c=Number(m.price_change_percentage_24h)||0;return `<div class="perp">${imgFor(id)?`<img class="coin-img" src="${imgFor(id)}" alt="">`:`<div class="coin-fallback">${s[0]}</div>`}<div class="perp-row"><span class="perp-sym">${s}</span><span class="lev">${l}</span></div><div class="move ${c>=0?'pos':'neg'}">${pct(c)}</div></div>`}).join('')}
-function renderPreds(){const rows=[['BTC 24h','bitcoin'],['SOL 24h','solana'],['ETH 24h','ethereum'],['USDC 24h','usd-coin']];$('#preds').innerHTML=rows.map(([n,id])=>{const c=Number(market[id]?.price_change_percentage_24h)||0;return `<div class="pred"><small>${n}</small><strong class="${c>=0?'pos':'neg'}">${c>=0?'ALCISTA':'BAJISTA'}</strong><p>${pct(c)} en 24 h</p></div>`}).join('')}
-async function fetchMarket(){try{const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&price_change_percentage=24h`,{cache:'no-store'});if(!r.ok)throw new Error(String(r.status));const arr=await r.json();const next={};arr.forEach(x=>next[x.id]=x);market=next;render()}catch(e){render()}}
-function openSheet(){const f=$('#fields');f.innerHTML=assets.map(a=>`<div class="field">${imgFor(a.id)?`<img src="${imgFor(a.id)}" alt="">`:`<div class="coin-fallback">${a.symbol[0]}</div>`}<label><b>${a.symbol}</b><span>${a.name}</span></label><input data-id="${a.id}" inputmode="decimal" type="number" min="0" step="any" value="${bal[a.id]||0}"></div>`).join('');$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false')}
+function renderPerps(){
+ const list=[['BTC','bitcoin','40x'],['ETH','ethereum','25x'],['SOL','solana','20x']];
+ $('#perps').innerHTML=list.map(([s,id,lev])=>{const m=market[id]||{},ch=Number(m.price_change_percentage_24h)||0;return `<div class="perp">${imgFor(id)?`<img class="coin-img" src="${imgFor(id)}" alt="">`:`<div class="coin-fallback">${s[0]}</div>`}<div class="perp-row"><span class="perp-sym">${s}</span><span class="lev">${lev}</span></div><div class="move ${ch>=0?'pos':'neg'}">${pct(ch)}</div></div>`}).join('')
+}
+function renderPreds(){
+ const list=[['SOL 24h','solana'],['BTC 24h','bitcoin'],['ETH 24h','ethereum'],['BONK 24h','bonk']];
+ $('#preds').innerHTML=list.map(([label,id])=>{const ch=Number(market[id]?.price_change_percentage_24h)||0;return `<div class="pred"><small>${label}</small><strong class="${ch>=0?'pos':'neg'}">${ch>=0?'ALCISTA':'BAJISTA'}</strong><p>Movimiento 24 h ${pct(ch)}</p></div>`}).join('')
+}
+async function fetchMarket(){
+ try{
+  const url=`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${encodeURIComponent(ids)}&price_change_percentage=24h&sparkline=false`;
+  const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error('market');
+  const rows=await r.json();const next={};rows.forEach(x=>next[x.id]=x);market=next;render();
+ }catch(e){render()}
+}
+function renderFieldsIfOpen(){if(!$('#sheet').classList.contains('open'))return;renderFields()}
+function renderFields(){
+ $('#fields').innerHTML=assets.map(a=>`<div class="field">${imgFor(a.id)?`<img src="${imgFor(a.id)}" alt="">`:`<div class="coin-fallback" style="width:34px;height:34px">${a.symbol[0]}</div>`}<label><b>${a.name}</b><span>${a.symbol}</span></label><input inputmode="decimal" data-id="${a.id}" type="number" min="0" step="any" value="${bal[a.id]||0}"></div>`).join('')
+}
+function openSheet(){renderFields();$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false')}
 function closeSheet(){$('#sheet').classList.remove('open');$('#sheet').setAttribute('aria-hidden','true')}
 function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>$('#toast').classList.remove('show'),1200)}
-$('#portfolio').onclick=openSheet;$('#portfolio').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openSheet()}};
-$('#cancel').onclick=closeSheet;$('#sheet').onclick=e=>{if(e.target===$('#sheet'))closeSheet()};
-$('#save').onclick=()=>{document.querySelectorAll('#fields input').forEach(i=>bal[i.dataset.id]=Math.max(0,Number(i.value)||0));localStorage.setItem('wallet-sim-balances',JSON.stringify(bal));closeSheet();render();toast('Guardado')};
-$('#plus').onclick=()=>toast('Simulación');
+$('#portfolio').addEventListener('click',openSheet);$('#portfolio').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openSheet()});$('#plus').addEventListener('click',openSheet);$('#cancel').addEventListener('click',closeSheet);$('#sheet').addEventListener('click',e=>{if(e.target===$('#sheet'))closeSheet()});
+$('#save').addEventListener('click',()=>{document.querySelectorAll('#fields input').forEach(i=>bal[i.dataset.id]=Math.max(0,Number(i.value)||0));localStorage.setItem('wallet-sim-balances',JSON.stringify(bal));closeSheet();render();toast('Saldos guardados')});
 render();fetchMarket();setInterval(fetchMarket,5000);
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
 </script>
 </body>
 </html>
