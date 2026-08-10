@@ -4,115 +4,73 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Wallet Sim">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
 <title>Wallet Simulator</title>
 <style>
-:root{--bg:#000;--card:#1c1c1e;--card2:#202022;--text:#f5f5f7;--muted:#9b9b9f;--purple:#aaa0ff;--green:#5dde79;--red:#ff454f;--line:#29292c}
+:root{--bg:#000;--card:#1c1c1e;--cardBorder:#242426;--text:#f4f4f5;--muted:#98989d;--purple:#a99cf8;--green:#54da79;--red:#ff474f}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:#000;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:#000;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
 body{min-height:100vh;overflow-x:hidden}
 button,input{font:inherit}
-.app{width:min(100%,900px);margin:0 auto;min-height:100vh;padding:calc(env(safe-area-inset-top) + 8px) 0 calc(118px + env(safe-area-inset-bottom))}
-.header{position:sticky;top:0;z-index:30;background:rgba(0,0,0,.93);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid #111}
-.nav{height:94px;display:flex;align-items:center;gap:14px;padding:12px 18px;overflow-x:auto;scrollbar-width:none}
-.nav::-webkit-scrollbar{display:none}
-.avatar{width:54px;height:54px;border-radius:50%;flex:0 0 54px;background:linear-gradient(145deg,#67cca2 0 52%,#fff0ae 52%);position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
-.avatar:before{content:"";position:absolute;width:31px;height:11px;border-radius:12px;background:#1c1c20;left:10px;top:14px;transform:rotate(-13deg)}
-.avatar:after{content:"≻≺";position:absolute;left:11px;bottom:5px;color:#19191c;font-weight:900;font-size:13px;letter-spacing:-3px}
-.pill{border:0;background:#202020;color:#aaa;border-radius:28px;padding:15px 22px;font-weight:680;font-size:18px;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)}
-.pill.active{background:var(--purple);color:#141416}
-.sim-badge{position:fixed;right:10px;top:calc(env(safe-area-inset-top) + 4px);z-index:100;border:1px solid rgba(171,160,255,.55);background:rgba(20,18,31,.88);backdrop-filter:blur(10px);color:#d8d2ff;border-radius:999px;padding:4px 8px;font-size:9px;font-weight:900;letter-spacing:.1em;pointer-events:none}
-.main{padding:0 18px}
-.account{padding:36px 0 28px}
-.account-name{color:#aaa;font-size:18px;font-weight:700;margin-bottom:18px}
-.account-name .chev{font-size:26px;font-weight:300;vertical-align:-2px;margin-left:2px}
-.balance{display:inline-block;font-size:clamp(58px,13.8vw,82px);font-weight:780;letter-spacing:-4.7px;line-height:.95;cursor:pointer;user-select:none}
+.app{width:100%;max-width:430px;min-height:100vh;margin:0 auto;padding:calc(env(safe-area-inset-top) + 3px) 0 calc(92px + env(safe-area-inset-bottom));background:#000}
+.header{height:82px;display:flex;align-items:center;overflow:hidden;background:#000;border-bottom:1px solid #101010}
+.nav{display:flex;align-items:center;gap:9px;padding:0 14px;width:max-content;min-width:100%;overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}
+.avatar{width:43px;height:43px;flex:0 0 43px;border-radius:50%;background:linear-gradient(145deg,#69cca2 0 48%,#fff1ad 48%);position:relative}
+.avatar:before{content:"";position:absolute;left:7px;top:10px;width:29px;height:8px;border-radius:999px;background:#1a1a1d;transform:rotate(-13deg)}
+.avatar:after{content:"≻≺";position:absolute;left:10px;bottom:4px;color:#17171a;font-size:11px;font-weight:900;letter-spacing:-2px}
+.pill{height:43px;border:0;border-radius:24px;background:#202020;color:#a7a7ab;padding:0 18px;font-size:17px;font-weight:650;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
+.pill.active{background:var(--purple);color:#121214}
+.simmark{position:fixed;z-index:90;right:8px;bottom:calc(72px + env(safe-area-inset-bottom));font-size:9px;font-weight:900;letter-spacing:.09em;color:#d4cdfd;background:rgba(25,22,39,.88);border:1px solid rgba(169,156,248,.45);border-radius:999px;padding:4px 7px;pointer-events:none}
+.main{padding:0 20px}
+.account{padding:24px 0 16px}
+.account-name{color:#a5a5aa;font-size:17px;font-weight:700;line-height:1;margin-bottom:18px}.account-name .chev{font-size:23px;font-weight:300;vertical-align:-2px}
+.balance{display:inline-block;font-size:52px;line-height:.94;font-weight:780;letter-spacing:-3.7px;cursor:pointer;user-select:none}
 .balance:active{opacity:.72}
-.dayline{margin-top:18px;display:flex;align-items:center;gap:9px;color:var(--red);font-size:19px;font-weight:760}
-.daypct{background:var(--red);color:#151517;border-radius:7px;padding:4px 8px;line-height:1}
-.section{margin-top:18px}
-.cash{height:88px;border-radius:27px;background:linear-gradient(180deg,#1f1f20,#1a1a1c);border:1px solid #242426;display:flex;align-items:center;padding:0 22px}
-.cash-icon{width:42px;height:34px;position:relative;margin-left:2px}
-.cash-icon:before,.cash-icon:after{content:"";position:absolute;inset:3px 0;border-radius:6px;background:#9fa0a7}
-.cash-icon:after{inset:9px 6px;background:#1c1c1e;border-radius:50%}
-.cash-icon i,.cash-icon b{position:absolute;width:6px;height:6px;border-radius:50%;background:#55565b;z-index:2;top:14px}
-.cash-icon i{left:5px}.cash-icon b{right:5px}
-.cash-label{font-size:21px;font-weight:760;margin-left:22px}.cash-value{margin-left:auto;font-size:21px;font-weight:430}
-.section-head{display:flex;align-items:center;margin:33px 0 14px}
-.section-title{font-size:29px;font-weight:810;letter-spacing:-.8px}.section-arrow{font-size:38px;color:#aaa;font-weight:300;margin-left:7px;line-height:.7}
-.tokens{display:flex;flex-direction:column;gap:10px}
-.token{min-height:94px;border-radius:26px;background:linear-gradient(180deg,#1f1f20,#1a1a1c);border:1px solid #242426;display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:13px;padding:14px 17px}
-.coin-img{width:50px;height:50px;border-radius:50%;object-fit:cover;background:#2b2b2e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-.coin-fallback{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#3974d7;font-weight:900;font-size:19px}
-.token-main strong{display:block;font-size:20px;letter-spacing:-.15px}.token-main span{display:block;color:#9c9ca0;font-size:16px;margin-top:5px}
-.token-side{text-align:right}.token-side strong{display:block;font-size:19px;font-weight:450}.token-side span{display:block;margin-top:5px;font-size:15px;color:var(--muted)}
+.dayline{display:flex;align-items:center;gap:8px;margin-top:13px;color:var(--red);font-size:18px;font-weight:760;line-height:1}.daypct{background:var(--red);color:#151517;border-radius:7px;padding:5px 8px 4px}
+.section{margin-top:16px}
+.cash{height:73px;border:1px solid var(--cardBorder);background:linear-gradient(#1d1d1f,#1a1a1c);border-radius:24px;display:flex;align-items:center;padding:0 20px}
+.cash-icon{width:36px;height:28px;position:relative;flex:0 0 36px}.cash-icon:before{content:"";position:absolute;inset:2px 0;border-radius:6px;background:#9d9ea4}.cash-icon:after{content:"";position:absolute;left:12px;top:8px;width:12px;height:12px;border-radius:50%;background:#4f5055;box-shadow:-10px 0 0 -4px #4f5055,10px 0 0 -4px #4f5055}
+.cash-label{font-size:19px;font-weight:760;margin-left:17px}.cash-value{margin-left:auto;font-size:19px;font-weight:430}
+.section-head{display:flex;align-items:center;margin:25px 0 10px}.section-title{font-size:26px;font-weight:810;letter-spacing:-.7px}.section-arrow{font-size:34px;color:#a5a5aa;font-weight:300;margin-left:6px;line-height:.7}
+.tokens{display:flex;flex-direction:column;gap:8px}
+.token{height:73px;border:1px solid var(--cardBorder);background:linear-gradient(#1d1d1f,#1a1a1c);border-radius:23px;display:grid;grid-template-columns:43px 1fr auto;align-items:center;gap:11px;padding:0 16px}
+.coin-img,.coin-fallback{width:43px;height:43px;border-radius:50%;object-fit:cover;background:#2a2a2d}.coin-fallback{display:grid;place-items:center;font-weight:900}
+.token-main strong{display:block;font-size:18px;font-weight:760;line-height:1.05}.token-main span{display:block;color:#9b9ba0;font-size:14px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.token-side{text-align:right}.token-side strong{display:block;font-size:17px;font-weight:470}.token-side span{display:block;margin-top:5px;font-size:13px}
 .pos{color:var(--green)!important}.neg{color:var(--red)!important}
-.empty{color:#777;text-align:center;padding:26px 8px;border-radius:24px;border:1px dashed #27272a;font-size:14px}
-.perps{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(165px,1fr);gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.perps::-webkit-scrollbar{display:none}
-.perp{height:178px;border-radius:27px;background:linear-gradient(180deg,#1f1f20,#1a1a1c);border:1px solid #242426;padding:20px 18px}
-.perp .coin-img{width:52px;height:52px;margin-bottom:19px}
-.perp-row{display:flex;align-items:center;gap:7px}.perp-sym{font-size:20px;font-weight:760}.lev{background:#28282a;border-radius:7px;padding:4px 7px;font-size:14px;color:#eee}.move{font-size:17px;font-weight:700;margin-top:12px}
-.pred-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pred{min-height:128px;border-radius:25px;background:linear-gradient(180deg,#1f1f20,#1a1a1c);border:1px solid #242426;padding:16px}.pred small{color:#8f8f94;font-weight:700}.pred strong{display:block;margin-top:15px;font-size:20px}.pred p{margin:8px 0 0;color:#8e8e93;font-size:13px}
-.bottom{position:fixed;z-index:40;left:50%;transform:translateX(-50%);bottom:0;width:min(900px,100%);padding:18px 18px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85) 30%,#000 52%)}
-.bottom-row{display:flex;align-items:center;gap:12px}.search{height:60px;flex:1;border-radius:30px;background:rgba(34,34,35,.96);border:1px solid #2b2b2d;display:flex;align-items:center;color:#858589;font-size:18px;padding:0 20px;backdrop-filter:blur(15px)}
-.search .mag{font-size:31px;font-weight:200;line-height:1;margin-right:12px;transform:rotate(-18deg)}
-.plus{width:60px;height:60px;border-radius:50%;border:0;background:var(--purple);color:#0d0d0f;font-size:43px;font-weight:280;line-height:1;padding:0 0 6px}
-.sheet{display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.68);align-items:flex-end;justify-content:center}.sheet.open{display:flex}
-.panel{width:min(900px,100%);max-height:86vh;overflow:auto;background:#151517;border:1px solid #303034;border-bottom:0;border-radius:29px 29px 0 0;padding:13px 18px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -22px 60px rgba(0,0,0,.55)}
-.handle{width:43px;height:5px;background:#4b4b50;border-radius:5px;margin:0 auto 17px}.panel h2{margin:0 0 5px;font-size:24px}.panel .hint{margin:0 0 16px;color:#8f8f94;font-size:13px;line-height:1.35}
-.field{display:grid;grid-template-columns:42px 1fr 125px;align-items:center;gap:11px;background:#202023;border:1px solid #2c2c30;border-radius:18px;padding:10px 12px;margin:9px 0}.field img{width:40px;height:40px;border-radius:50%;object-fit:cover}.field label b{display:block}.field label span{display:block;color:#89898e;font-size:12px;margin-top:2px}.field input{width:100%;border:0;outline:0;background:#101012;color:#fff;border-radius:11px;padding:11px 9px;text-align:right;font-size:15px}
-.actions{display:flex;gap:10px;margin-top:14px}.actions button{flex:1;border:0;border-radius:16px;padding:14px;font-weight:800}.cancel{background:#29292d;color:#eee}.save{background:var(--purple);color:#111}
-.toast{position:fixed;z-index:140;left:50%;bottom:116px;transform:translateX(-50%) translateY(15px);background:#242427;border:1px solid #3a3a3d;border-radius:14px;padding:10px 15px;font-weight:750;opacity:0;pointer-events:none;transition:.18s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:390px){.nav{gap:10px;padding-left:13px;padding-right:13px}.avatar{width:49px;height:49px;flex-basis:49px}.pill{padding:13px 18px;font-size:17px}.main{padding:0 14px}.balance{font-size:58px}.token{grid-template-columns:48px 1fr auto;padding:13px}.coin-img,.coin-fallback{width:46px;height:46px}.token-main strong{font-size:19px}.token-main span{font-size:14px}.token-side strong{font-size:18px}.perps{grid-auto-columns:160px}.bottom{padding-left:14px;padding-right:14px}}
-@media(min-width:700px){.main{padding-left:30px;padding-right:30px}.pred-wrap{grid-template-columns:repeat(4,1fr)}.perps{grid-auto-columns:220px}}
+.empty{color:#777;padding:20px 8px;text-align:center;border:1px dashed #252528;border-radius:21px;font-size:13px}
+.perps{display:grid;grid-auto-flow:column;grid-auto-columns:158px;gap:9px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.perps::-webkit-scrollbar{display:none}
+.perp{height:143px;border:1px solid var(--cardBorder);background:linear-gradient(#1d1d1f,#1a1a1c);border-radius:24px;padding:16px}
+.perp .coin-img{width:46px;height:46px;margin-bottom:14px}.perp-row{display:flex;align-items:center;gap:6px}.perp-sym{font-size:18px;font-weight:760}.lev{background:#29292b;border-radius:7px;padding:4px 6px 3px;font-size:12px;color:#eee}.move{font-size:15px;font-weight:700;margin-top:10px}
+.pred-wrap{display:grid;grid-template-columns:1fr 1fr;gap:9px}.pred{min-height:105px;border:1px solid var(--cardBorder);background:linear-gradient(#1d1d1f,#1a1a1c);border-radius:22px;padding:14px}.pred small{color:#8f8f94;font-size:12px;font-weight:700}.pred strong{display:block;margin-top:11px;font-size:17px}.pred p{margin:6px 0 0;color:#8f8f94;font-size:11px}
+.bottom{position:fixed;z-index:50;left:50%;transform:translateX(-50%);bottom:0;width:min(430px,100%);padding:11px 20px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.86) 28%,#000 53%)}
+.bottom-row{display:flex;align-items:center;gap:11px}.search{height:51px;flex:1;border:1px solid #2a2a2c;border-radius:27px;background:rgba(33,33,34,.96);display:flex;align-items:center;color:#86868a;padding:0 17px;font-size:16px;backdrop-filter:blur(15px)}.mag{font-size:27px;font-weight:200;line-height:1;margin-right:10px;transform:rotate(-18deg)}
+.plus{width:51px;height:51px;flex:0 0 51px;border-radius:50%;border:0;background:var(--purple);color:#0c0c0e;font-size:37px;font-weight:260;line-height:1;padding:0 0 5px}
+.sheet{display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.7);align-items:flex-end;justify-content:center}.sheet.open{display:flex}.panel{width:min(430px,100%);max-height:84vh;overflow:auto;background:#151517;border:1px solid #303034;border-bottom:0;border-radius:27px 27px 0 0;padding:13px 17px calc(22px + env(safe-area-inset-bottom))}.handle{width:41px;height:5px;background:#4b4b4f;border-radius:4px;margin:0 auto 15px}.panel h2{margin:0 0 4px;font-size:22px}.hint{margin:0 0 14px;color:#8f8f94;font-size:12px;line-height:1.35}.field{display:grid;grid-template-columns:38px 1fr 112px;gap:10px;align-items:center;background:#202023;border:1px solid #2c2c30;border-radius:17px;padding:9px 11px;margin:8px 0}.field img{width:36px;height:36px;border-radius:50%;object-fit:cover}.field b{display:block;font-size:14px}.field span{display:block;color:#88888d;font-size:11px;margin-top:2px}.field input{width:100%;border:0;outline:0;background:#101012;color:#fff;border-radius:10px;padding:9px 8px;text-align:right;font-size:14px}.actions{display:flex;gap:9px;margin-top:13px}.actions button{flex:1;border:0;border-radius:15px;padding:13px;font-weight:800}.cancel{background:#29292d;color:#eee}.save{background:var(--purple);color:#111}
+.toast{position:fixed;z-index:140;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(12px);background:#242427;border:1px solid #39393d;border-radius:13px;padding:9px 13px;font-size:12px;font-weight:750;opacity:0;pointer-events:none;transition:.17s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:431px){.app{box-shadow:0 0 0 1px #0e0e0f}.main{padding-left:22px;padding-right:22px}}
 </style>
 </head>
 <body>
-<div class="sim-badge">SIMULACIÓN</div>
+<div class="simmark">SIMULACIÓN</div>
 <div class="app">
-  <header class="header">
-    <nav class="nav" aria-label="Navegación">
-      <div class="avatar" aria-hidden="true"></div>
-      <button class="pill active">Inicio</button>
-      <button class="pill">Operar</button>
-      <button class="pill">Predecir</button>
-      <button class="pill">Explorar</button>
-    </nav>
-  </header>
-
-  <main class="main">
-    <section class="account">
-      <div class="account-name">Cuenta 1 <span class="chev">⌄</span></div>
-      <div class="balance" id="portfolio" title="Toca para editar">$8.26</div>
-      <div class="dayline"><span id="deltaUsd">-$0.00032</span><span class="daypct" id="deltaPct">-0.00%</span></div>
-    </section>
-
-    <section class="section">
-      <div class="cash"><div class="cash-icon"><i></i><b></b></div><div class="cash-label">Cash</div><div class="cash-value">$0.00</div></div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><div class="section-title">Tokens</div><div class="section-arrow">›</div></div>
-      <div class="tokens" id="tokens"></div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><div class="section-title">Perps</div><div class="section-arrow">›</div></div>
-      <div class="perps" id="perps"></div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><div class="section-title">Predicciones</div><div class="section-arrow">›</div></div>
-      <div class="pred-wrap" id="preds"></div>
-    </section>
-  </main>
+<header class="header"><nav class="nav" aria-label="Navegación"><div class="avatar" aria-hidden="true"></div><button class="pill active">Inicio</button><button class="pill">Operar</button><button class="pill">Predecir</button><button class="pill">Explorar</button></nav></header>
+<main class="main">
+<section class="account"><div class="account-name">Cuenta 1 <span class="chev">⌄</span></div><div class="balance" id="portfolio" role="button" tabindex="0" aria-label="Editar saldos">$8.26</div><div class="dayline"><span id="deltaUsd">-$0.00032</span><span class="daypct" id="deltaPct">-0.00%</span></div></section>
+<section class="section"><div class="cash"><div class="cash-icon"></div><div class="cash-label">Cash</div><div class="cash-value">$0.00</div></div></section>
+<section class="section"><div class="section-head"><div class="section-title">Tokens</div><div class="section-arrow">›</div></div><div class="tokens" id="tokens"></div></section>
+<section class="section"><div class="section-head"><div class="section-title">Perps</div><div class="section-arrow">›</div></div><div class="perps" id="perps"></div></section>
+<section class="section"><div class="section-head"><div class="section-title">Predicciones</div><div class="section-arrow">›</div></div><div class="pred-wrap" id="preds"></div></section>
+</main>
 </div>
-
 <div class="bottom"><div class="bottom-row"><div class="search"><span class="mag">⌕</span>Buscar Phantom</div><button class="plus" id="plus" aria-label="Añadir">+</button></div></div>
-
-<div class="sheet" id="sheet" aria-hidden="true"><div class="panel"><div class="handle"></div><h2>Editar cartera de simulación</h2><p class="hint">Los activos con saldo 0 no aparecen en la pantalla principal. Los cambios solo se guardan en este navegador.</p><div id="fields"></div><div class="actions"><button class="cancel" id="cancel">Cancelar</button><button class="save" id="save">Guardar</button></div></div></div>
+<div class="sheet" id="sheet" aria-hidden="true"><div class="panel"><div class="handle"></div><h2>Editar cartera de simulación</h2><p class="hint">Los activos con saldo 0 no aparecen. Los saldos se guardan solo en este navegador.</p><div id="fields"></div><div class="actions"><button class="cancel" id="cancel">Cancelar</button><button class="save" id="save">Guardar</button></div></div></div>
 <div class="toast" id="toast">Actualizado</div>
-
 <script>
 const assets=[
 {id:'solana',symbol:'SOL',name:'Solana',def:0},
@@ -122,41 +80,36 @@ const assets=[
 {id:'dogwifcoin',symbol:'WIF',name:'dogwifhat',def:0},
 {id:'bonk',symbol:'BONK',name:'Bonk',def:0}
 ];
-const marketIds=assets.map(a=>a.id);
+const ids=assets.map(a=>a.id).join(',');
 const $=s=>document.querySelector(s);
-let market={};
-let bal={};
+let market={},bal={};
 try{bal=JSON.parse(localStorage.getItem('wallet-sim-balances')||localStorage.getItem('larpBalances')||'{}')}catch(e){bal={}}
 assets.forEach(a=>{const n=Number(bal[a.id]);bal[a.id]=Number.isFinite(n)?Math.max(0,n):a.def});
-const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:Math.abs(Number(n)||0)<.01?5:2}).format(Number(n)||0);
-const qty=n=>{n=Number(n)||0;if(Math.abs(n)>=1000000)return new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:3}).format(n);return n.toLocaleString('en-US',{maximumFractionDigits:8})};
-const pct=n=>`${Number(n)>=0?'+':''}${(Number(n)||0).toFixed(2)}%`;
+const money=n=>{n=Number(n)||0;return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:Math.abs(n)<.01?5:2}).format(n)};
+const qty=n=>{n=Number(n)||0;return n.toLocaleString('en-US',{maximumFractionDigits:8})};
+const pct=n=>`${n>=0?'+':''}${(Number(n)||0).toFixed(2)}%`;
 function imgFor(id){return market[id]?.image||''}
-function imgTag(id,symbol,cls='coin-img'){const src=imgFor(id);return src?`<img class="${cls}" src="${src}" alt="${symbol}" onerror="this.outerHTML='<div class=\'coin-fallback\'>${symbol[0]}</div>'">`:`<div class="coin-fallback">${symbol==='USDC'?'$':symbol[0]}</div>`}
 function render(){
- let total=0,changeUsd=0;
+ let total=0,weighted=0,weight=0;
  const visible=assets.filter(a=>(bal[a.id]||0)>0);
- visible.forEach(a=>{const m=market[a.id]||{};const value=(bal[a.id]||0)*(m.price??(a.id==='usd-coin'?1:0));total+=value;changeUsd+=value*((m.change||0)/100)});
+ $('#tokens').innerHTML=visible.length?'':'<div class="empty">No hay tokens con saldo.</div>';
+ visible.forEach(a=>{const m=market[a.id]||{};const price=Number(m.current_price)|| (a.id==='usd-coin'?1:0);const value=(bal[a.id]||0)*price;const ch=Number(m.price_change_percentage_24h)||0;total+=value;weighted+=ch*value;weight+=value;$('#tokens').insertAdjacentHTML('beforeend',`<div class="token">${imgFor(a.id)?`<img class="coin-img" src="${imgFor(a.id)}" alt="">`:`<div class="coin-fallback">${a.symbol[0]}</div>`}<div class="token-main"><strong>${a.symbol}</strong><span>${qty(bal[a.id])} ${a.symbol}</span></div><div class="token-side"><strong>${money(value)}</strong><span class="${ch>=0?'pos':'neg'}">${pct(ch)}</span></div></div>`)});
  $('#portfolio').textContent=money(total);
- $('#deltaUsd').textContent=`${changeUsd>=0?'+':'-'}${money(Math.abs(changeUsd))}`;
- const pc=total?changeUsd/(total-changeUsd||total)*100:0;
- $('#deltaPct').textContent=pct(pc);
- const neg=changeUsd<0;document.querySelector('.dayline').style.color=neg?'var(--red)':'var(--green)';$('#deltaPct').style.background=neg?'var(--red)':'var(--green)';
- $('#tokens').innerHTML=visible.length?visible.map(a=>{const m=market[a.id]||{};const price=m.price??(a.id==='usd-coin'?1:0);const value=(bal[a.id]||0)*price;const c=m.change||0;return `<div class="token">${imgTag(a.id,a.symbol)}<div class="token-main"><strong>${a.symbol}</strong><span>${qty(bal[a.id])} ${a.symbol}</span></div><div class="token-side"><strong>${money(value)}</strong><span class="${c>=0?'pos':'neg'}">${pct(c)}</span></div></div>`}).join(''):`<div class="empty">No hay tokens con saldo</div>`;
+ const ch=weight?weighted/weight:0;const delta=total*(ch/100)/(1+(ch/100)||1);
+ $('#deltaUsd').textContent=`${delta<0?'-':'+'}${money(Math.abs(delta))}`;$('#deltaUsd').className=ch>=0?'pos':'neg';$('#deltaPct').textContent=pct(ch);$('#deltaPct').style.background=ch>=0?'var(--green)':'var(--red)';
  renderPerps();renderPreds();
 }
-function renderPerps(){const rows=[['BTC','bitcoin','40x'],['ETH','ethereum','25x'],['SOL','solana','20x']];$('#perps').innerHTML=rows.map(([s,id,l])=>{const m=market[id]||{};return `<div class="perp">${imgTag(id,s)}<div class="perp-row"><span class="perp-sym">${s}</span><span class="lev">${l}</span></div><div class="move ${(m.change||0)>=0?'pos':'neg'}">${pct(m.change||0)}</div></div>`}).join('')}
-function renderPreds(){const rows=[['BTC','bitcoin'],['SOL','solana'],['ETH','ethereum'],['BONK','bonk']];$('#preds').innerHTML=rows.map(([s,id])=>{const c=market[id]?.change||0;return `<div class="pred"><small>${s} 24h</small><strong class="${c>=0?'pos':'neg'}">${c>=0?'ALCISTA':'BAJISTA'}</strong><p>${pct(c)} en 24 h</p></div>`}).join('')}
-async function fetchPrices(){try{const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${marketIds.join(',')}&price_change_percentage=24h`,{cache:'no-store'});if(!r.ok)throw new Error('feed');const data=await r.json();data.forEach(x=>market[x.id]={price:x.current_price,change:x.price_change_percentage_24h||0,image:x.image});render()}catch(e){render()}}
-function openSheet(){const host=$('#fields');host.innerHTML=assets.map(a=>`<div class="field">${imgTag(a.id,a.symbol,'')}<label><b>${a.symbol}</b><span>${a.name}</span></label><input type="number" min="0" step="any" inputmode="decimal" data-id="${a.id}" value="${bal[a.id]||0}"></div>`).join('');host.querySelectorAll('img').forEach(i=>i.style.cssText='width:40px;height:40px;border-radius:50%;object-fit:cover');$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false')}
+function renderPerps(){const rows=[['BTC','bitcoin','40x'],['ETH','ethereum','25x'],['SOL','solana','20x']];$('#perps').innerHTML=rows.map(([s,id,l])=>{const m=market[id]||{};const c=Number(m.price_change_percentage_24h)||0;return `<div class="perp">${imgFor(id)?`<img class="coin-img" src="${imgFor(id)}" alt="">`:`<div class="coin-fallback">${s[0]}</div>`}<div class="perp-row"><span class="perp-sym">${s}</span><span class="lev">${l}</span></div><div class="move ${c>=0?'pos':'neg'}">${pct(c)}</div></div>`}).join('')}
+function renderPreds(){const rows=[['BTC 24h','bitcoin'],['SOL 24h','solana'],['ETH 24h','ethereum'],['USDC 24h','usd-coin']];$('#preds').innerHTML=rows.map(([n,id])=>{const c=Number(market[id]?.price_change_percentage_24h)||0;return `<div class="pred"><small>${n}</small><strong class="${c>=0?'pos':'neg'}">${c>=0?'ALCISTA':'BAJISTA'}</strong><p>${pct(c)} en 24 h</p></div>`}).join('')}
+async function fetchMarket(){try{const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&price_change_percentage=24h`,{cache:'no-store'});if(!r.ok)throw new Error(String(r.status));const arr=await r.json();const next={};arr.forEach(x=>next[x.id]=x);market=next;render()}catch(e){render()}}
+function openSheet(){const f=$('#fields');f.innerHTML=assets.map(a=>`<div class="field">${imgFor(a.id)?`<img src="${imgFor(a.id)}" alt="">`:`<div class="coin-fallback">${a.symbol[0]}</div>`}<label><b>${a.symbol}</b><span>${a.name}</span></label><input data-id="${a.id}" inputmode="decimal" type="number" min="0" step="any" value="${bal[a.id]||0}"></div>`).join('');$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false')}
 function closeSheet(){$('#sheet').classList.remove('open');$('#sheet').setAttribute('aria-hidden','true')}
-function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>$('#toast').classList.remove('show'),1200)}
-$('#portfolio').onclick=openSheet;
-$('#plus').onclick=openSheet;
-$('#cancel').onclick=closeSheet;
-$('#sheet').onclick=e=>{if(e.target===$('#sheet'))closeSheet()};
+function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>$('#toast').classList.remove('show'),1200)}
+$('#portfolio').onclick=openSheet;$('#portfolio').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openSheet()}};
+$('#cancel').onclick=closeSheet;$('#sheet').onclick=e=>{if(e.target===$('#sheet'))closeSheet()};
 $('#save').onclick=()=>{document.querySelectorAll('#fields input').forEach(i=>bal[i.dataset.id]=Math.max(0,Number(i.value)||0));localStorage.setItem('wallet-sim-balances',JSON.stringify(bal));closeSheet();render();toast('Guardado')};
-render();fetchPrices();setInterval(fetchPrices,30000);
+$('#plus').onclick=()=>toast('Simulación');
+render();fetchMarket();setInterval(fetchMarket,5000);
 </script>
 </body>
 </html>
